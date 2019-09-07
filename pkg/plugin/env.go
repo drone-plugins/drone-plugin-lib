@@ -13,8 +13,43 @@ package plugin
 // Drone prior to the 1.0 release.
 
 const (
-	// StepNameEnvVar is the environment variable for setting Step.Name.
+	//---------------------------------------------------------------------
+	// Stage Enviornment Variables
+	//---------------------------------------------------------------------
+
+	// StageArchEnvVar corresponds to Stage.Arch.
+	StageArchEnvVar = "DRONE_STAGE_ARCH"
+	// StageDependsOnEnvVar corresponds to Stage.DependsOn.
+	StageDependsOnEnvVar = "DRONE_STAGE_DEPENDS_ON"
+	// StageFinishedEnvVar corresponds to Stage.Finished.
+	StageFinishedEnvVar = "DRONE_STAGE_FINISHED"
+	// StageKindEnvVar corresponds Stage.Kind.
+	StageKindEnvVar = "DRONE_STAGE_KIND"
+	// StageMachineEnvVar corresponds to Stage.Machine.
+	StageMachineEnvVar = "DRONE_STAGE_MACHINE"
+	// StageNameEnvVar corresponds to Stage.Name.
+	StageNameEnvVar = "DRONE_STAGE_NAME"
+	// StageNumberEnvVar corresponds to Stage.Number.
+	StageNumberEnvVar = "DRONE_STAGE_NUMBER"
+	// StageOSEnvVar corresponds to Stage.OS.
+	StageOSEnvVar = "DRONE_STAGE_OS"
+	// StageStartedEnvVar corresponds to Stage.Started.
+	StageStartedEnvVar = "DRONE_STAGE_STARTED"
+	// StageStatusEnvVar corresponds to Stage.Status.
+	StageStatusEnvVar = "DRONE_STAGE_STATUS"
+	// StageTypeEnvVar corresponds to Stage.Type.
+	StageTypeEnvVar = "DRONE_STAGE_TYPE"
+	// StageVariantEnvVar corresponds to Stage.Variant.
+	StageVariantEnvVar = "DRONE_STAGE_VARIANT"
+	// StageVersionEnvVar corresponds to Stage.Version.
+	StageVersionEnvVar = "DRONE_STAGE_VERSION"
+
+	//---------------------------------------------------------------------
+	// Step Environment Variables
+	//---------------------------------------------------------------------
+
+	// StepNameEnvVar corresponds to Step.Name.
 	StepNameEnvVar = "DRONE_STEP_NAME"
-	// StepNumberEnvVar is the environment variable for setting Step.Number.
+	// StepNumberEnvVar corresponds to Step.Number.
 	StepNumberEnvVar = "DRONE_STEP_NUMBER"
 )
