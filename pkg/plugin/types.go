@@ -8,6 +8,25 @@ package plugin
 import "time"
 
 type (
+	// BaseConfig is the common configuration for a plugin.
+	//
+	// The configuration organizes all the information available to a plugin
+	// executing as a step within a stage.
+	//
+	// Plugins can choose to compose this within their own config.
+	//
+	//     import "github.com/drone-plugins/drone-plugin-lib/pkg/plugin"
+	//
+	//     type MyPluginConfig struct {
+	//         plugin.BaseConfig
+	//         Foo string
+	//         Bar string
+	//     }
+	BaseConfig struct {
+		Stage Stage
+		Step  Step
+	}
+
 	// Stage represents a build stage.
 	Stage struct {
 		// Arch is the platform architecture of the current build stage.
