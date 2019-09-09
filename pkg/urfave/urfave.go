@@ -42,31 +42,31 @@ import (
 
 const (
 	// StageArchFlag corresponds to plugin.Stage.Arch.
-	StageArchFlag = "DRONE_STAGE_ARCH"
+	StageArchFlag = "stage.arch"
 	// StageDependsOnFlag corresponds to plugin.Stage.DependsOn.
-	StageDependsOnFlag = "DRONE_STAGE_DEPENDS_ON"
+	StageDependsOnFlag = "stage.depends-on"
 	// StageFinishedFlag corresponds to plugin.Stage.Finished.
-	StageFinishedFlag = "DRONE_STAGE_FINISHED"
+	StageFinishedFlag = "stage.finished"
 	// StageKindFlag corresponds Stage.Kind.
-	StageKindFlag = "DRONE_STAGE_KIND"
+	StageKindFlag = "stage.kind"
 	// StageMachineFlag corresponds to plugin.Stage.Machine.
-	StageMachineFlag = "DRONE_STAGE_MACHINE"
+	StageMachineFlag = "stage.machine"
 	// StageNameFlag corresponds to plugin.Stage.Name.
-	StageNameFlag = "DRONE_STAGE_NAME"
+	StageNameFlag = "stage.name"
 	// StageNumberFlag corresponds to plugin.Stage.Number.
-	StageNumberFlag = "DRONE_STAGE_NUMBER"
+	StageNumberFlag = "stage.number"
 	// StageOSFlag corresponds to plugin.Stage.OS.
-	StageOSFlag = "DRONE_STAGE_OS"
+	StageOSFlag = "stage.os"
 	// StageStartedFlag corresponds to plugin.Stage.Started.
-	StageStartedFlag = "DRONE_STAGE_STARTED"
+	StageStartedFlag = "stage.started"
 	// StageStatusFlag corresponds to plugin.Stage.Status.
-	StageStatusFlag = "DRONE_STAGE_STATUS"
+	StageStatusFlag = "stage.status"
 	// StageTypeFlag corresponds to plugin.Stage.Type.
-	StageTypeFlag = "DRONE_STAGE_TYPE"
+	StageTypeFlag = "stage.type"
 	// StageVariantFlag corresponds to plugin.Stage.Variant.
-	StageVariantFlag = "DRONE_STAGE_VARIANT"
+	StageVariantFlag = "stage.variant"
 	// StageVersionFlag corresponds to plugin.Stage.Version.
-	StageVersionFlag = "DRONE_STAGE_VERSION"
+	StageVersionFlag = "stage.version"
 )
 
 // StageFlags has the cli.Flags for the plugin.Stage
