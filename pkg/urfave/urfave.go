@@ -298,3 +298,94 @@ func StepFromContext(ctx *cli.Context) plugin.Step {
 		Number: ctx.Int(StepNumberFlag),
 	}
 }
+
+//---------------------------------------------------------------------
+// SemVer Flags
+//---------------------------------------------------------------------
+
+const (
+	// SemVerBuildFlag corresponds to SemVer.Build.
+	SemVerBuildFlag = "semver.build"
+	// SemVerErrorFlag corresponds to SemVer.Error.
+	SemVerErrorFlag = "semver.error"
+	// SemVerMajorFlag corresponds to SemVer.Major.
+	SemVerMajorFlag = "semver.major"
+	// SemVerMinorFlag corresponds to SemVer.Minor.
+	SemVerMinorFlag = "semver.minor"
+	// SemVerPatchFlag corresponds to SemVer.Patch.
+	SemVerPatchFlag = "semver.patch"
+	// SemVerPrereleaseFlag corresponds to SemVer.Prerelease
+	SemVerPrereleaseFlag = "semver.prerelease"
+	// SemVerShortFlag corresponds to SemVer.Short.
+	SemVerShortFlag = "semver.short"
+	// SemVerVersionFlag corresponds to SemVer.Version
+	SemVerVersionFlag = "semver.version"
+)
+
+// SemVerFlags has the cli.Flags for the plugin.SemVer.
+func SemVerFlags() []cli.Flag {
+	return []cli.Flag{
+		cli.StringFlag{
+			Name:   SemVerBuildFlag,
+			Usage:  "semver build",
+			EnvVar: plugin.SemVerBuildEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerErrorFlag,
+			Usage:  "semver error",
+			EnvVar: plugin.SemVerErrorEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerMajorFlag,
+			Usage:  "semver major",
+			EnvVar: plugin.SemVerMajorEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerMinorFlag,
+			Usage:  "semver minor",
+			EnvVar: plugin.SemVerMinorEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerPatchFlag,
+			Usage:  "semver patch",
+			EnvVar: plugin.SemVerPatchEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerPrereleaseFlag,
+			Usage:  "semver prerelease",
+			EnvVar: plugin.SemVerPrereleaseEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerShortFlag,
+			Usage:  "semver short",
+			EnvVar: plugin.SemVerShortEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   SemVerVersionFlag,
+			Usage:  "semver version",
+			EnvVar: plugin.SemVerVersionEnvVar,
+			Hidden: true,
+		},
+	}
+}
+
+// SemVerFromContext creates a plugin.Step from the cli.SemVer.
+func SemVerFromContext(ctx *cli.Context) plugin.SemVer {
+	return plugin.SemVer{
+		Build:      ctx.String(SemVerBuildFlag),
+		Error:      ctx.String(SemVerErrorFlag),
+		Major:      ctx.String(SemVerMajorFlag),
+		Minor:      ctx.String(SemVerMinorFlag),
+		Patch:      ctx.String(SemVerPatchFlag),
+		Prerelease: ctx.String(SemVerPrereleaseFlag),
+		Short:      ctx.String(SemVerShortFlag),
+		Version:    ctx.String(SemVerVersionFlag),
+	}
+}
