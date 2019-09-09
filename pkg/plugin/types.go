@@ -87,3 +87,30 @@ type (
 		Number int
 	}
 )
+
+// StageFromEnv creates a Stage from the environment variables used by Drone.
+func StageFromEnv() Stage {
+	return Stage{
+		Arch:      StringEnvVar(StageArchEnvVar),
+		DependsOn: StringSliceEnvVar(StageDependsOnEnvVar),
+		Finished:  TimeEnvVar(StageFinishedEnvVar),
+		Kind:      StringEnvVar(StageKindEnvVar),
+		Machine:   StringEnvVar(StageMachineEnvVar),
+		Name:      StringEnvVar(StageNameEnvVar),
+		Number:    IntEnvVar(StageNumberEnvVar),
+		OS:        StringEnvVar(StageOSEnvVar),
+		Started:   TimeEnvVar(StageStartedEnvVar),
+		Status:    StringEnvVar(StageStatusEnvVar),
+		Type:      StringEnvVar(StageTypeEnvVar),
+		Variant:   StringEnvVar(StageVariantEnvVar),
+		Version:   StringEnvVar(StageVersionEnvVar),
+	}
+}
+
+// StepFromEnv creates a Step from the environment variables used by Drone.
+func StepFromEnv() Step {
+	return Step{
+		Name:   StringEnvVar(StepNameEnvVar),
+		Number: IntEnvVar(StepNumberEnvVar),
+	}
+}

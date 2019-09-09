@@ -5,6 +5,13 @@
 
 package plugin
 
+import (
+	"os"
+	"strconv"
+	"strings"
+	"time"
+)
+
 // List of enviornment variables set by Drone when running a step within a
 // build stage.
 //
@@ -53,3 +60,84 @@ const (
 	// StepNumberEnvVar corresponds to Step.Number.
 	StepNumberEnvVar = "DRONE_STEP_NUMBER"
 )
+
+// StringEnvVar gets the environment variable's value.
+//
+// If the value is not present then this returns the empty string.
+func StringEnvVar(envVar string) string {
+	return envVarValue(envVar)
+}
+
+// StringSliceEnvVar gets the environment variable as a string slice.
+//
+// If the value is not present then this returns an empty slice.
+func StringSliceEnvVar(envVar string) []string {
+	return strings.Split(envVarValue(envVar), ",")
+}
+
+// IntEnvVar gets the environment variable as an int.
+//
+// If the value is not present then this returns 0.
+func IntEnvVar(envVar string) int {
+	return int(Int64EnvVar(envVar))
+}
+
+// Int64EnvVar gets the environment variable as an int64.
+//
+// If the value is not present then this returns 0.
+func Int64EnvVar(envVar string) int64 {
+	value, err := strconv.ParseInt(envVarValue(envVar), 0, 64)
+
+	if err != nil {
+		return 0
+	}
+
+	return value
+}
+
+// UintEnvVar gets the environment variable as an uint.
+//
+// If the value is not present then this returns 0.
+func UintEnvVar(envVar string) uint {
+	return uint(Uint64EnvVar(envVar))
+}
+
+// Uint64EnvVar gets the environment variable as an uint64.
+//
+// If the value is not present then this returns 0.
+func Uint64EnvVar(envVar string) uint64 {
+	value, err := strconv.ParseUint(envVarValue(envVar), 0, 64)
+
+	if err != nil {
+		return 0
+	}
+
+	return value
+}
+
+// BoolEnvVar gets the environment variable as a bool.
+//
+// If the value is not present then this returns false.
+func BoolEnvVar(envVar string) bool {
+	value, err := strconv.ParseBool(envVarValue(envVar))
+
+	if err != nil {
+		return false
+	}
+
+	return value
+}
+
+// TimeEnvVar gets the environment variable as a Time created from a unix
+// timestamp.
+//
+// If the value is not present then this returns time.Unix(0).
+func TimeEnvVar(envVar string) time.Time {
+	return time.Unix(Int64EnvVar(envVar), 0)
+}
+
+// envVarValue returns the first matched environment variable or the empty
+// string if none was found.
+func envVarValue(envVar string) string {
+	return os.Getenv(envVar)
+}
