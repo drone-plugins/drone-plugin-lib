@@ -137,6 +137,124 @@ func RepoFromContext(ctx *cli.Context) plugin.Repo {
 }
 
 //---------------------------------------------------------------------
+// Commit Flags
+//---------------------------------------------------------------------
+
+const (
+	// CommitAfterFlag corresponds to plugin.Commit.After.
+	CommitAfterFlag = "commit.after"
+	// CommitAuthorFlag corresponds to plugin.Commit.Author.
+	CommitAuthorFlag = "commit.author"
+	// CommitAuthorAvatarFlag corresponds to plugin.Commit.AuthorAvatar.
+	CommitAuthorAvatarFlag = "commit.author-avatar"
+	// CommitAuthorEmailFlag corresponds to plugin.Commit.AuthorEmail.
+	CommitAuthorEmailFlag = "commit.author-email"
+	// CommitAuthorNameFlag corresponds to plugin.Commit.AuthorName.
+	CommitAuthorNameFlag = "commit.author-name"
+	// CommitBeforeFlag corresponds to plugin.Commit.Before.
+	CommitBeforeFlag = "commit.before"
+	// CommitBranchFlag corresponds to plugin.Commit.Branch.
+	CommitBranchFlag = "commit.branch"
+	// CommitLinkFlag corresponds to plugin.Commit.Link.
+	CommitLinkFlag = "commit.link"
+	// CommitMessageFlag corresponds to plugin.Commit.Message.
+	CommitMessageFlag = "commit.message"
+	// CommitRefFlag corresponds to plugin.Commit.Ref.
+	CommitRefFlag = "commit.ref"
+	// CommitSHAFlag corresponds to plugin.Commit.SHA.
+	CommitSHAFlag = "commit.sha"
+)
+
+// CommitFlags has the cli.Flags for the plugin.Commit.
+func CommitFlags() []cli.Flag {
+	return []cli.Flag{
+		cli.StringFlag{
+			Name:   CommitAfterFlag,
+			Usage:  "commit after",
+			EnvVar: plugin.CommitAfterEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitAuthorFlag,
+			Usage:  "commit author",
+			EnvVar: plugin.CommitAuthorEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitAuthorAvatarFlag,
+			Usage:  "commit author avatar",
+			EnvVar: plugin.CommitAuthorAvatarEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitAuthorEmailFlag,
+			Usage:  "commit author email",
+			EnvVar: plugin.CommitAuthorEmailEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitAuthorNameFlag,
+			Usage:  "commit author name",
+			EnvVar: plugin.CommitAuthorNameEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitBeforeFlag,
+			Usage:  "commit before",
+			EnvVar: plugin.CommitBeforeEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitBranchFlag,
+			Usage:  "commit branch",
+			EnvVar: plugin.CommitBranchEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitLinkFlag,
+			Usage:  "commit link",
+			EnvVar: plugin.CommitLinkEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitMessageFlag,
+			Usage:  "commit message",
+			EnvVar: plugin.CommitMessageEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitRefFlag,
+			Usage:  "commit ref",
+			EnvVar: plugin.CommitRefEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   CommitSHAFlag,
+			Usage:  "commit sha",
+			EnvVar: plugin.CommitSHAEnvVar,
+			Hidden: true,
+		},
+	}
+}
+
+// CommitFromContext creates a plugin.Commit from the cli.Context.
+func CommitFromContext(ctx *cli.Context) plugin.Commit {
+	return plugin.Commit{
+		After:        ctx.String(CommitAfterFlag),
+		Author:       ctx.String(CommitAuthorFlag),
+		AuthorAvatar: ctx.String(CommitAuthorAvatarFlag),
+		AuthorEmail:  ctx.String(CommitAuthorEmailFlag),
+		AuthorName:   ctx.String(CommitAuthorNameFlag),
+		Before:       ctx.String(CommitBeforeFlag),
+		Branch:       ctx.String(CommitBranchFlag),
+		Link:         ctx.String(CommitLinkFlag),
+		Message:      ctx.String(CommitMessageFlag),
+		Ref:          ctx.String(CommitRefFlag),
+		SHA:          ctx.String(CommitSHAFlag),
+	}
+}
+
+//---------------------------------------------------------------------
 // Stage Flags
 //---------------------------------------------------------------------
 
