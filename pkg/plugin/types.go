@@ -40,6 +40,33 @@ type (
 		Visibility    string
 	}
 
+	// Commit represents the current commit being built.
+	Commit struct {
+		// After contains the commit sha after the patch is applied.
+		After string
+		// Author of the commit.
+		Author string
+		// AuthorAvatar of the commit.
+		AuthorAvatar string
+		// AuthorEmail of the commit.
+		AuthorEmail string
+		// AuthorName of the commit.
+		AuthorName string
+		// Before contains the commit sha before the patch is applied.
+		Before string
+		// Branch target for the push or pull request. This may be empty for
+		// tag events.
+		Branch string
+		// Link to the commit or object in the source control management system.
+		Link string
+		// Message for the current commit.
+		Message string
+		// Ref for the current commit.
+		Ref string
+		// SHA for the current commit.
+		SHA string
+	}
+
 	// Stage represents a build stage.
 	Stage struct {
 		// Arch is the platform architecture of the current build stage.
@@ -139,6 +166,23 @@ func RepoFromEnv() Repo {
 		RemoteURL:     StringEnvVar(RepoRemoteURLEnvVar),
 		SCM:           StringEnvVar(RepoSCMEnvVar),
 		Visibility:    StringEnvVar(RepoVisibilityEnvVar),
+	}
+}
+
+// CommitFromEnv creates a Commit from the environment variables used by Drone.
+func CommitFromEnv() Commit {
+	return Commit{
+		After:        StringEnvVar(CommitAfterEnvVar),
+		Author:       StringEnvVar(CommitAuthorEnvVar),
+		AuthorAvatar: StringEnvVar(CommitAuthorAvatarEnvVar),
+		AuthorEmail:  StringEnvVar(CommitAuthorEmailEnvVar),
+		AuthorName:   StringEnvVar(CommitAuthorNameEnvVar),
+		Before:       StringEnvVar(CommitBeforeEnvVar),
+		Branch:       StringEnvVar(CommitBranchEnvVar),
+		Link:         StringEnvVar(CommitLinkEnvVar),
+		Message:      StringEnvVar(CommitMessageEnvVar),
+		Ref:          StringEnvVar(CommitRefEnvVar),
+		SHA:          StringEnvVar(CommitSHAEnvVar),
 	}
 }
 

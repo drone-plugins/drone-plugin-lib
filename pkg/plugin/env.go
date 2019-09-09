@@ -22,6 +22,7 @@ import (
 const (
 	// The following environment variables are being ignored currently
 	//
+	// * DRONE_COMMIT - Redundant with DRONE_COMMIT_SHA
 	// * DRONE_GIT_HTTP_URL
 	// * DRONE_GIT_SSH_URL
 	// * DRONE_REPO_NAMESPACE - Redundant to DRONE_REPO_OWNER
@@ -48,6 +49,33 @@ const (
 	RepoSCMEnvVar = "DRONE_REPO_SCM"
 	// RepoVisibilityEnvVar corresponds to Repo.Visbility.
 	RepoVisibilityEnvVar = "DRONE_REPO_VISIBILITY"
+
+	//---------------------------------------------------------------------
+	// Commit Enviornment Variables
+	//---------------------------------------------------------------------
+
+	// CommitAfterEnvVar corresponds to Commit.After.
+	CommitAfterEnvVar = "DRONE_COMMIT_AFTER"
+	// CommitAuthorEnvVar corresponds to Commit.Author.
+	CommitAuthorEnvVar = "DRONE_COMMIT_AUTHOR"
+	// CommitAuthorAvatarEnvVar corresponds to Commit.AuthorAvatar.
+	CommitAuthorAvatarEnvVar = "DRONE_COMMIT_AUTHOR_AVATAR"
+	// CommitAuthorEmailEnvVar corresponds to Commit.AuthorEmail.
+	CommitAuthorEmailEnvVar = "DRONE_COMMIT_AUTHOR_EMAIL"
+	// CommitAuthorNameEnvVar corresponds to Commit.AuthorName.
+	CommitAuthorNameEnvVar = "DRONE_COMMIT_AUTHOR_NAME"
+	// CommitBeforeEnvVar corresponds to Commit.Before.
+	CommitBeforeEnvVar = "DRONE_COMMIT_BEFORE"
+	// CommitBranchEnvVar corresponds to Commit.Branch.
+	CommitBranchEnvVar = "DRONE_COMMIT_BRANCH"
+	// CommitLinkEnvVar corresponds to Commit.Link.
+	CommitLinkEnvVar = "DRONE_COMMIT_LINK"
+	// CommitMessageEnvVar corresponds to Commit.Message.
+	CommitMessageEnvVar = "DRONE_COMMIT_MESSAGE"
+	// CommitRefEnvVar corresponds to Commit.Ref.
+	CommitRefEnvVar = "DRONE_COMMIT_REF"
+	// CommitSHAEnvVar corresponds to Commit.SHA.
+	CommitSHAEnvVar = "DRONE_COMMIT_SHA"
 
 	//---------------------------------------------------------------------
 	// Stage Enviornment Variables
