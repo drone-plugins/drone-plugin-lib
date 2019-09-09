@@ -99,6 +99,32 @@ type (
 		Name   string
 		Number int
 	}
+
+	// SemVer represents the semantic version of the currently running build.
+	//
+	// This value is only applicable for tags. If the tag cannot be parsed into
+	// a semantic version then SemVer.Error will have the reason.
+	SemVer struct {
+		// Build version number.
+		//
+		// This is signified by a + at the end of the tag.
+		Build string
+		// Error is the semantic version parsing error if the tag was invalid.
+		Error string
+		// Major version number.
+		Major string
+		// Minor version number.
+		Minor string
+		// Patch version number.
+		Patch string
+		// Prerelease version.
+		Prerelease string
+		// Short version of the semantic version string where labels and
+		// metadata are truncated.
+		Short string
+		// Version is the full semantic version.
+		Version string
+	}
 )
 
 // RepoFromEnv creates a Repo from the environment variables used by Drone.
@@ -140,5 +166,19 @@ func StepFromEnv() Step {
 	return Step{
 		Name:   StringEnvVar(StepNameEnvVar),
 		Number: IntEnvVar(StepNumberEnvVar),
+	}
+}
+
+// SemVerFromEnv creates a SemVer from the environment variables used by Drone.
+func SemVerFromEnv() SemVer {
+	return SemVer{
+		Build:      StringEnvVar(SemVerBuildEnvVar),
+		Error:      StringEnvVar(SemVerErrorEnvVar),
+		Major:      StringEnvVar(SemVerMajorEnvVar),
+		Minor:      StringEnvVar(SemVerMinorEnvVar),
+		Patch:      StringEnvVar(SemVerPatchEnvVar),
+		Prerelease: StringEnvVar(SemVerPrereleaseEnvVar),
+		Short:      StringEnvVar(SemVerShortEnvVar),
+		Version:    StringEnvVar(SemVerVersionEnvVar),
 	}
 }

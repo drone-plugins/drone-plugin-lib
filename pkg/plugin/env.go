@@ -88,6 +88,27 @@ const (
 	StepNameEnvVar = "DRONE_STEP_NAME"
 	// StepNumberEnvVar corresponds to Step.Number.
 	StepNumberEnvVar = "DRONE_STEP_NUMBER"
+
+	//---------------------------------------------------------------------
+	// SemVer Variables
+	//---------------------------------------------------------------------
+
+	// SemVerBuildEnvVar corresponds to SemVer.Build.
+	SemVerBuildEnvVar = "DRONE_SEMVER_BUILD"
+	// SemVerErrorEnvVar corresponds to SemVer.Error.
+	SemVerErrorEnvVar = "DRONE_SEMVER_ERROR"
+	// SemVerMajorEnvVar corresponds to SemVer.Major.
+	SemVerMajorEnvVar = "DRONE_SEMVER_MAJOR"
+	// SemVerMinorEnvVar corresponds to SemVer.Minor.
+	SemVerMinorEnvVar = "DRONE_SEMVER_MINOR"
+	// SemVerPatchEnvVar corresponds to SemVer.Patch.
+	SemVerPatchEnvVar = "DRONE_SEMVER_PATCH"
+	// SemVerPrereleaseEnvVar corresponds to SemVer.Prerelease
+	SemVerPrereleaseEnvVar = "DRONE_SEMVER_PRERELEASE"
+	// SemVerShortEnvVar corresponds to SemVer.Short.
+	SemVerShortEnvVar = "DRONE_SEMVER_SHORT"
+	// SemVerVersionEnvVar corresponds to SemVer.Version
+	SemVerVersionEnvVar = "DRONE_SEMVER"
 )
 
 // StringEnvVar gets the environment variable's value.
