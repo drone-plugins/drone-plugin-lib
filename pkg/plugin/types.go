@@ -27,6 +27,41 @@ type (
 		Step  Step
 	}
 
+	// Build represents a build of a repository.
+	Build struct {
+		// Action that triggered the build. This value is used to differentiate
+		// bettween a pull request being opened vs synchronized.
+		Action string
+		// Created time of the build.
+		Created time.Time
+		// Event that triggered the build.
+		Event string
+		// Finished time of the build.
+		Finished time.Time
+		// Number for the build.
+		Number int
+		// Parent build number for the build.
+		Parent int
+		// Started time of the build.
+		Started time.Time
+		// Status of the build.
+		Status string
+		// DeployTo the environment.
+		DeployTo string
+		// FailedStages of the build.
+		FailedStages []string
+		// FailedSteps of the build.
+		FailedSteps []string
+		// PullRequest number of the build.
+		PullRequest int
+		// SourceBranch for the pull request.
+		SourceBranch string
+		// Tag of the build.
+		Tag string
+		// TargetBranch for the pull request.
+		TargetBranch string
+	}
+
 	// Repo represents the repository for the build.
 	Repo struct {
 		DefaultBranch string
@@ -153,6 +188,27 @@ type (
 		Version string
 	}
 )
+
+// BuildFromEnv creates a Build from the environment variables used by Drone.
+func BuildFromEnv() Build {
+	return Build{
+		Action:       StringEnvVar(BuildActionEnvVar),
+		Created:      TimeEnvVar(BuildCreatedEnvVar),
+		Event:        StringEnvVar(BuildEventEnvVar),
+		Finished:     TimeEnvVar(BuildFinishedEnvVar),
+		Number:       IntEnvVar(BuildNumberEnvVar),
+		Parent:       IntEnvVar(BuildParentEnvVar),
+		Started:      TimeEnvVar(BuildStartedEnvVar),
+		Status:       StringEnvVar(BuildStatusEnvVar),
+		DeployTo:     StringEnvVar(BuildDeployToEnvVar),
+		FailedStages: StringSliceEnvVar(BuildFailedStagesEnvVar),
+		FailedSteps:  StringSliceEnvVar(BuildFailedStepsEnvVar),
+		PullRequest:  IntEnvVar(BuildPullRequestEnvVar),
+		SourceBranch: StringEnvVar(BuildSourceBranchEnvVar),
+		Tag:          StringEnvVar(BuildTagEnvVar),
+		TargetBranch: StringEnvVar(BuildTargetBranchEnvVar),
+	}
+}
 
 // RepoFromEnv creates a Repo from the environment variables used by Drone.
 func RepoFromEnv() Repo {

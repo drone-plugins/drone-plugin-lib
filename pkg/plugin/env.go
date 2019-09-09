@@ -28,6 +28,41 @@ const (
 	// * DRONE_REPO_NAMESPACE - Redundant to DRONE_REPO_OWNER
 
 	//---------------------------------------------------------------------
+	// Build Enviornment Variables
+	//---------------------------------------------------------------------
+
+	// BuildActionEnvVar corresponds to Build.Action.
+	BuildActionEnvVar = "DRONE_BUILD_ACTION"
+	// BuildCreatedEnvVar corresponds to Build.Created.
+	BuildCreatedEnvVar = "DRONE_BUILD_CREATED"
+	// BuildEventEnvVar corresponds to Build.Event.
+	BuildEventEnvVar = "DRONE_BUILD_EVENT"
+	// BuildFinishedEnvVar corresponds to Build.Finished.
+	BuildFinishedEnvVar = "DRONE_BUILD_FINISHED"
+	// BuildNumberEnvVar corresponds to Build.Created.
+	BuildNumberEnvVar = "DRONE_BUILD_NUMBER"
+	// BuildParentEnvVar corresponds to Build.Parent.
+	BuildParentEnvVar = "DRONE_BUILD_PARENT"
+	// BuildStartedEnvVar corresponds to Build.Started.
+	BuildStartedEnvVar = "DRONE_BUILD_STARTED"
+	// BuildStatusEnvVar corresponds to Build.Status.
+	BuildStatusEnvVar = "DRONE_BUILD_STATUS"
+	// BuildDeployToEnvVar corresponds to Build.DeployTo.
+	BuildDeployToEnvVar = "DRONE_DEPLOY_TO"
+	// BuildFailedStagesEnvVar corresponds to Build.FailedStages.
+	BuildFailedStagesEnvVar = "DRONE_FAILED_STAGES"
+	// BuildFailedStepsEnvVar corresponds to Build.FailedSteps.
+	BuildFailedStepsEnvVar = "DRONE_FAILED_STEPS"
+	// BuildPullRequestEnvVar corresponds to Build.PullRequest.
+	BuildPullRequestEnvVar = "DRONE_PULL_REQUEST"
+	// BuildSourceBranchEnvVar corresponds to Build.SourceBranch.
+	BuildSourceBranchEnvVar = "DRONE_SOURCE_BRANCH"
+	// BuildTagEnvVar corresponds to Build.Tag.
+	BuildTagEnvVar = "DRONE_TAG"
+	// BuildTargetBranchEnvVar corresponds to Build.TargetBranch.
+	BuildTargetBranchEnvVar = "DRONE_TARGET_BRANCH"
+
+	//---------------------------------------------------------------------
 	// Repo Enviornment Variables
 	//---------------------------------------------------------------------
 
