@@ -20,6 +20,35 @@ import (
 // Drone prior to the 1.0 release.
 
 const (
+	// The following environment variables are being ignored currently
+	//
+	// * DRONE_GIT_HTTP_URL
+	// * DRONE_GIT_SSH_URL
+	// * DRONE_REPO_NAMESPACE - Redundant to DRONE_REPO_OWNER
+
+	//---------------------------------------------------------------------
+	// Repo Enviornment Variables
+	//---------------------------------------------------------------------
+
+	// RepoDefaultBranchEnvVar corresponds to Repo.DefaultBranch.
+	RepoDefaultBranchEnvVar = "DRONE_REPO_BRANCH"
+	// RepoFullNameEnvVar corresponds to Repo.FullName.
+	RepoFullNameEnvVar = "DRONE_REPO"
+	// RepoLinkEnvVar corresponds to Repo.Link.
+	RepoLinkEnvVar = "DRONE_REPO_LINK"
+	// RepoNameEnvVar corresponds to Repo.Name
+	RepoNameEnvVar = "DRONE_REPO_NAME"
+	// RepoOwnerEnvVar corresponds to Repo.Owner.
+	RepoOwnerEnvVar = "DRONE_REPO_OWNER"
+	// RepoPrivateEnvVar corresponds to Repo.Private.
+	RepoPrivateEnvVar = "DRONE_REPO_PRIVATE"
+	// RepoRemoteURLEnvVar corresponds to Repo.RemoteURL.
+	RepoRemoteURLEnvVar = "DRONE_REMOTE_URL"
+	// RepoSCMEnvVar corresponds to Repo.SCM.
+	RepoSCMEnvVar = "DRONE_REPO_SCM"
+	// RepoVisibilityEnvVar corresponds to Repo.Visbility.
+	RepoVisibilityEnvVar = "DRONE_REPO_VISIBILITY"
+
 	//---------------------------------------------------------------------
 	// Stage Enviornment Variables
 	//---------------------------------------------------------------------

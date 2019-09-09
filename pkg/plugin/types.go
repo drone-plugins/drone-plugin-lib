@@ -27,6 +27,19 @@ type (
 		Step  Step
 	}
 
+	// Repo represents the repository for the build.
+	Repo struct {
+		DefaultBranch string
+		FullName      string
+		Link          string
+		Name          string
+		Owner         string
+		Private       bool
+		RemoteURL     string
+		SCM           string
+		Visibility    string
+	}
+
 	// Stage represents a build stage.
 	Stage struct {
 		// Arch is the platform architecture of the current build stage.
@@ -87,6 +100,21 @@ type (
 		Number int
 	}
 )
+
+// RepoFromEnv creates a Repo from the environment variables used by Drone.
+func RepoFromEnv() Repo {
+	return Repo{
+		DefaultBranch: StringEnvVar(RepoDefaultBranchEnvVar),
+		FullName:      StringEnvVar(RepoFullNameEnvVar),
+		Link:          StringEnvVar(RepoLinkEnvVar),
+		Name:          StringEnvVar(RepoNameEnvVar),
+		Owner:         StringEnvVar(RepoOwnerEnvVar),
+		Private:       BoolEnvVar(RepoPrivateEnvVar),
+		RemoteURL:     StringEnvVar(RepoRemoteURLEnvVar),
+		SCM:           StringEnvVar(RepoSCMEnvVar),
+		Visibility:    StringEnvVar(RepoVisibilityEnvVar),
+	}
+}
 
 // StageFromEnv creates a Stage from the environment variables used by Drone.
 func StageFromEnv() Stage {
