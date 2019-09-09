@@ -37,6 +37,106 @@ import (
 )
 
 //---------------------------------------------------------------------
+// Repo Flags
+//---------------------------------------------------------------------
+
+const (
+	// RepoDefaultBranchFlag corresponds to Repo.DefaultBranch.
+	RepoDefaultBranchFlag = "repo.branch"
+	// RepoFullNameFlag corresponds to Repo.FullName.
+	RepoFullNameFlag = "repo.full-name"
+	// RepoLinkFlag corresponds to Repo.Link.
+	RepoLinkFlag = "repo.link"
+	// RepoNameFlag corresponds to Repo.Name
+	RepoNameFlag = "repo.name"
+	// RepoOwnerFlag corresponds to Repo.Owner.
+	RepoOwnerFlag = "repo.owner"
+	// RepoPrivateFlag corresponds to Repo.Private.
+	RepoPrivateFlag = "repo.private"
+	// RepoRemoteURLFlag corresponds to Repo.RemoteURL.
+	RepoRemoteURLFlag = "repo.remote-url"
+	// RepoSCMFlag corresponds to Repo.SCM.
+	RepoSCMFlag = "repo.scm"
+	// RepoVisibilityFlag corresponds to Repo.Visbility.
+	RepoVisibilityFlag = "repo.visibility"
+)
+
+// RepoFlags has the cli.Flags for the plugin.Repo
+func RepoFlags() []cli.Flag {
+	return []cli.Flag{
+		cli.StringFlag{
+			Name:   RepoDefaultBranchFlag,
+			Usage:  "repo default branch",
+			EnvVar: plugin.RepoDefaultBranchEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoFullNameFlag,
+			Usage:  "repo full name",
+			EnvVar: plugin.RepoFullNameEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoLinkFlag,
+			Usage:  "repo link",
+			EnvVar: plugin.RepoLinkEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoNameFlag,
+			Usage:  "repo name",
+			EnvVar: plugin.RepoNameEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoOwnerFlag,
+			Usage:  "repo owner",
+			EnvVar: plugin.RepoOwnerEnvVar,
+			Hidden: true,
+		},
+		cli.BoolFlag{
+			Name:   RepoPrivateFlag,
+			Usage:  "repo private",
+			EnvVar: plugin.RepoPrivateEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoRemoteURLFlag,
+			Usage:  "repo remote url",
+			EnvVar: plugin.RepoRemoteURLEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoSCMFlag,
+			Usage:  "repo scm",
+			EnvVar: plugin.RepoSCMEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   RepoVisibilityFlag,
+			Usage:  "repo visibility",
+			EnvVar: plugin.RepoVisibilityEnvVar,
+			Hidden: true,
+		},
+	}
+}
+
+// RepoFromContext creates a plugin.Repo from the cli.Context.
+func RepoFromContext(ctx *cli.Context) plugin.Repo {
+	return plugin.Repo{
+		DefaultBranch: ctx.String(RepoDefaultBranchFlag),
+		FullName:      ctx.String(RepoFullNameFlag),
+		Link:          ctx.String(RepoLinkFlag),
+		Name:          ctx.String(RepoNameFlag),
+		Owner:         ctx.String(RepoOwnerFlag),
+		Private:       ctx.Bool(RepoPrivateFlag),
+		RemoteURL:     ctx.String(RepoRemoteURLFlag),
+		SCM:           ctx.String(RepoSCMFlag),
+		Visibility:    ctx.String(RepoVisibilityFlag),
+	}
+}
+
+//---------------------------------------------------------------------
 // Stage Flags
 //---------------------------------------------------------------------
 
