@@ -8,29 +8,6 @@ package plugin
 import "time"
 
 type (
-	// Context contains information about the current execution context.
-	//
-	// The context organizes all the information available to a plugin executing
-	// as a step within a stage.
-	//
-	// Plugins can choose to compose this within their own config.
-	//
-	//     import "github.com/drone-plugins/drone-plugin-lib/pkg/plugin"
-	//
-	//     type MyPluginContext struct {
-	//         plugin.Context
-	//         Foo string
-	//         Bar string
-	//     }
-	Context struct {
-		Build  Build
-		Repo   Repo
-		Commit Commit
-		Stage  Stage
-		Step   Step
-		SemVer SemVer
-	}
-
 	// Build represents a build of a repository.
 	Build struct {
 		// Action that triggered the build. This value is used to differentiate
