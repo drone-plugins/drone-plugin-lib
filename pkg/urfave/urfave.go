@@ -648,7 +648,7 @@ func SemVerFlags() []cli.Flag {
 	}
 }
 
-// SemVerFromContext creates a plugin.Step from the cli.SemVer.
+// SemVerFromContext creates a plugin.Step from the cli.Context.
 func SemVerFromContext(ctx *cli.Context) plugin.SemVer {
 	return plugin.SemVer{
 		Build:      ctx.String(SemVerBuildFlag),
