@@ -110,52 +110,40 @@ type (
 	Stage struct {
 		// Arch is the platform architecture of the current build stage.
 		Arch string
-
 		// DependsOn is a list of dependencies for the current build stage.
 		DependsOn []string
-
 		// Finished is the unix timestamp for when the pipeline is finished.
 		//
 		// A running pipleine cannot have a finish timestamp, therefore, the
 		// system aways sets this value to the current timestamp.
 		Finished time.Time
-
 		// Kind is the kind of resource being executed.
 		//
 		// This value is sourced from the `kind` attribute in the yaml
 		// configuration file
 		Kind string
-
 		// Machine provides the name of the host machine on which the build
 		// stage is currently running.
 		Machine string
-
 		// Name is the name for the current running build stage.
 		Name string
-
 		// Number is the stage number for the current running build stage.
 		Number int
-
 		// OS is the target operating system for the current build stage.
 		OS string
-
 		// Started is the unix timestamp for when a build stage was started by
 		// the runner.
 		Started time.Time
-
 		// Status is the status for the current running build stage.
 		//
 		// If all of the stage's steps are passing, the status defaults to
 		// success.
 		Status string
-
 		// Type is the type of resource being executed.
 		Type string
-
 		// Variant is the target architecture variant for the current build
 		// stage.
 		Variant string
-
 		// Version is OS version for the current build stage.
 		Version string
 	}

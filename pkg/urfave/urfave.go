@@ -195,23 +195,23 @@ func BuildFromContext(ctx *cli.Context) plugin.Build {
 //---------------------------------------------------------------------
 
 const (
-	// RepoDefaultBranchFlag corresponds to Repo.DefaultBranch.
+	// RepoDefaultBranchFlag corresponds to plugin.Repo.DefaultBranch.
 	RepoDefaultBranchFlag = "repo.branch"
-	// RepoFullNameFlag corresponds to Repo.FullName.
+	// RepoFullNameFlag corresponds to plugin.Repo.FullName.
 	RepoFullNameFlag = "repo.full-name"
-	// RepoLinkFlag corresponds to Repo.Link.
+	// RepoLinkFlag corresponds to plugin.Repo.Link.
 	RepoLinkFlag = "repo.link"
-	// RepoNameFlag corresponds to Repo.Name
+	// RepoNameFlag corresponds to plugin.Repo.Name
 	RepoNameFlag = "repo.name"
-	// RepoOwnerFlag corresponds to Repo.Owner.
+	// RepoOwnerFlag corresponds to plugin.Repo.Owner.
 	RepoOwnerFlag = "repo.owner"
-	// RepoPrivateFlag corresponds to Repo.Private.
+	// RepoPrivateFlag corresponds to plugin.Repo.Private.
 	RepoPrivateFlag = "repo.private"
-	// RepoRemoteURLFlag corresponds to Repo.RemoteURL.
+	// RepoRemoteURLFlag corresponds to plugin.Repo.RemoteURL.
 	RepoRemoteURLFlag = "repo.remote-url"
-	// RepoSCMFlag corresponds to Repo.SCM.
+	// RepoSCMFlag corresponds to plugin.Repo.SCM.
 	RepoSCMFlag = "repo.scm"
-	// RepoVisibilityFlag corresponds to Repo.Visbility.
+	// RepoVisibilityFlag corresponds to plugin.Repo.Visbility.
 	RepoVisibilityFlag = "repo.visibility"
 )
 
@@ -576,21 +576,21 @@ func StepFromContext(ctx *cli.Context) plugin.Step {
 //---------------------------------------------------------------------
 
 const (
-	// SemVerBuildFlag corresponds to SemVer.Build.
+	// SemVerBuildFlag corresponds to plugin.SemVer.Build.
 	SemVerBuildFlag = "semver.build"
-	// SemVerErrorFlag corresponds to SemVer.Error.
+	// SemVerErrorFlag corresponds to plugin.SemVer.Error.
 	SemVerErrorFlag = "semver.error"
-	// SemVerMajorFlag corresponds to SemVer.Major.
+	// SemVerMajorFlag corresponds to plugin.SemVer.Major.
 	SemVerMajorFlag = "semver.major"
-	// SemVerMinorFlag corresponds to SemVer.Minor.
+	// SemVerMinorFlag corresponds to plugin.SemVer.Minor.
 	SemVerMinorFlag = "semver.minor"
-	// SemVerPatchFlag corresponds to SemVer.Patch.
+	// SemVerPatchFlag corresponds to plugin.SemVer.Patch.
 	SemVerPatchFlag = "semver.patch"
-	// SemVerPrereleaseFlag corresponds to SemVer.Prerelease
+	// SemVerPrereleaseFlag corresponds to plugin.SemVer.Prerelease
 	SemVerPrereleaseFlag = "semver.prerelease"
-	// SemVerShortFlag corresponds to SemVer.Short.
+	// SemVerShortFlag corresponds to plugin.SemVer.Short.
 	SemVerShortFlag = "semver.short"
-	// SemVerVersionFlag corresponds to SemVer.Version
+	// SemVerVersionFlag corresponds to plugin.SemVer.Version
 	SemVerVersionFlag = "semver.version"
 )
 
