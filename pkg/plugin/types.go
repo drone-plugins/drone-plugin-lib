@@ -34,26 +34,26 @@ type (
 		Action string
 		// Created time of the build.
 		Created time.Time
+		// DeployTo the environment.
+		DeployTo string
 		// Event that triggered the build.
 		Event string
+		// FailedStages of the build.
+		FailedStages []string
+		// FailedSteps of the build.
+		FailedSteps []string
 		// Finished time of the build.
 		Finished time.Time
 		// Number for the build.
 		Number int
 		// Parent build number for the build.
 		Parent int
+		// PullRequest number of the build.
+		PullRequest int
 		// Started time of the build.
 		Started time.Time
 		// Status of the build.
 		Status string
-		// DeployTo the environment.
-		DeployTo string
-		// FailedStages of the build.
-		FailedStages []string
-		// FailedSteps of the build.
-		FailedSteps []string
-		// PullRequest number of the build.
-		PullRequest int
 		// SourceBranch for the pull request.
 		SourceBranch string
 		// Tag of the build.
@@ -194,17 +194,17 @@ func BuildFromEnv() Build {
 	return Build{
 		Action:       StringEnvVar(BuildActionEnvVar),
 		Created:      TimeEnvVar(BuildCreatedEnvVar),
+		DeployTo:     StringEnvVar(BuildDeployToEnvVar),
 		Event:        StringEnvVar(BuildEventEnvVar),
+		FailedStages: StringSliceEnvVar(BuildFailedStagesEnvVar),
+		FailedSteps:  StringSliceEnvVar(BuildFailedStepsEnvVar),
 		Finished:     TimeEnvVar(BuildFinishedEnvVar),
 		Number:       IntEnvVar(BuildNumberEnvVar),
 		Parent:       IntEnvVar(BuildParentEnvVar),
-		Started:      TimeEnvVar(BuildStartedEnvVar),
-		Status:       StringEnvVar(BuildStatusEnvVar),
-		DeployTo:     StringEnvVar(BuildDeployToEnvVar),
-		FailedStages: StringSliceEnvVar(BuildFailedStagesEnvVar),
-		FailedSteps:  StringSliceEnvVar(BuildFailedStepsEnvVar),
 		PullRequest:  IntEnvVar(BuildPullRequestEnvVar),
 		SourceBranch: StringEnvVar(BuildSourceBranchEnvVar),
+		Started:      TimeEnvVar(BuildStartedEnvVar),
+		Status:       StringEnvVar(BuildStatusEnvVar),
 		Tag:          StringEnvVar(BuildTagEnvVar),
 		TargetBranch: StringEnvVar(BuildTargetBranchEnvVar),
 	}
