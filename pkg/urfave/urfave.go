@@ -37,6 +37,160 @@ import (
 )
 
 //---------------------------------------------------------------------
+// Build Flags
+//---------------------------------------------------------------------
+
+const (
+	// BuildActionFlag corresponds to plugin.Build.Action.
+	BuildActionFlag = "build.action"
+	// BuildCreatedFlag corresponds to plugin.Build.Created.
+	BuildCreatedFlag = "build.created"
+	// BuildDeployToFlag corresponds to plugin.Build.DeployTo.
+	BuildDeployToFlag = "build.deploy-to"
+	// BuildEventFlag corresponds to plugin.Build.Event.
+	BuildEventFlag = "build.event"
+	// BuildFailedStagesFlag corresponds to plugin.Build.FailedStages.
+	BuildFailedStagesFlag = "build.failed-stages"
+	// BuildFailedStepsFlag corresponds to plugin.Build.FailedSteps.
+	BuildFailedStepsFlag = "build.failed-steps"
+	// BuildFinishedFlag corresponds to plugin.Build.Finished.
+	BuildFinishedFlag = "build.finished"
+	// BuildNumberFlag corresponds to plugin.Build.Created.
+	BuildNumberFlag = "build.number"
+	// BuildParentFlag corresponds to plugin.Build.Parent.
+	BuildParentFlag = "build.parent"
+	// BuildPullRequestFlag corresponds to plugin.Build.PullRequest.
+	BuildPullRequestFlag = "build.pull-request"
+	// BuildSourceBranchFlag corresponds to plugin.Build.SourceBranch.
+	BuildSourceBranchFlag = "build.source-branch"
+	// BuildStartedFlag corresponds to plugin.Build.Started.
+	BuildStartedFlag = "build.started"
+	// BuildStatusFlag corresponds to plugin.Build.Status.
+	BuildStatusFlag = "build.status"
+	// BuildTagFlag corresponds to plugin.Build.Tag.
+	BuildTagFlag = "build.tag"
+	// BuildTargetBranchFlag corresponds to plugin.Build.TargetBranch.
+	BuildTargetBranchFlag = "build.target-branch"
+)
+
+// BuildFlags has the cli.Flags for the plugin.Build.
+func BuildFlags() []cli.Flag {
+	return []cli.Flag{
+		cli.StringFlag{
+			Name:   BuildActionFlag,
+			Usage:  "build action",
+			EnvVar: plugin.BuildActionEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildCreatedFlag,
+			Usage:  "build created",
+			EnvVar: plugin.BuildCreatedEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildDeployToFlag,
+			Usage:  "build deploy to",
+			EnvVar: plugin.BuildDeployToEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildEventFlag,
+			Usage:  "build event",
+			EnvVar: plugin.BuildEventEnvVar,
+			Hidden: true,
+		},
+		cli.StringSliceFlag{
+			Name:   BuildFailedStagesFlag,
+			Usage:  "build failed stages",
+			EnvVar: plugin.BuildFailedStagesEnvVar,
+			Hidden: true,
+		},
+		cli.StringSliceFlag{
+			Name:   BuildFailedStepsFlag,
+			Usage:  "build failed steps",
+			EnvVar: plugin.BuildFailedStepsEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildFinishedFlag,
+			Usage:  "build finished",
+			EnvVar: plugin.BuildFinishedEnvVar,
+			Hidden: true,
+		},
+		cli.IntFlag{
+			Name:   BuildNumberFlag,
+			Usage:  "build number",
+			EnvVar: plugin.BuildNumberEnvVar,
+			Hidden: true,
+		},
+		cli.IntFlag{
+			Name:   BuildParentFlag,
+			Usage:  "build parent",
+			EnvVar: plugin.BuildParentEnvVar,
+			Hidden: true,
+		},
+		cli.IntFlag{
+			Name:   BuildPullRequestFlag,
+			Usage:  "build pull request",
+			EnvVar: plugin.BuildPullRequestEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildSourceBranchFlag,
+			Usage:  "build source branch",
+			EnvVar: plugin.BuildSourceBranchEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildStartedFlag,
+			Usage:  "build started",
+			EnvVar: plugin.BuildStartedEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildStatusFlag,
+			Usage:  "build status",
+			EnvVar: plugin.BuildStatusEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildTagFlag,
+			Usage:  "build tag",
+			EnvVar: plugin.BuildTagEnvVar,
+			Hidden: true,
+		},
+		cli.StringFlag{
+			Name:   BuildTargetBranchFlag,
+			Usage:  "build target branch",
+			EnvVar: plugin.BuildTargetBranchEnvVar,
+			Hidden: true,
+		},
+	}
+}
+
+// BuildFromContext creates a plugin.Build from the cli.Context.
+func BuildFromContext(ctx *cli.Context) plugin.Build {
+	return plugin.Build{
+		Action:       ctx.String(BuildActionFlag),
+		Created:      time.Unix(ctx.Int64(BuildCreatedFlag), 0),
+		DeployTo:     ctx.String(BuildDeployToFlag),
+		Event:        ctx.String(BuildEventFlag),
+		FailedStages: ctx.StringSlice(BuildFailedStagesFlag),
+		FailedSteps:  ctx.StringSlice(BuildFailedStepsFlag),
+		Finished:     time.Unix(ctx.Int64(BuildFinishedFlag), 0),
+		Number:       ctx.Int(BuildNumberFlag),
+		Parent:       ctx.Int(BuildParentFlag),
+		PullRequest:  ctx.Int(BuildPullRequestFlag),
+		SourceBranch: ctx.String(BuildSourceBranchFlag),
+		Started:      time.Unix(ctx.Int64(BuildStartedFlag), 0),
+		Status:       ctx.String(BuildStatusFlag),
+		Tag:          ctx.String(BuildTagFlag),
+		TargetBranch: ctx.String(BuildTargetBranchFlag),
+	}
+}
+
+//---------------------------------------------------------------------
 // Repo Flags
 //---------------------------------------------------------------------
 
