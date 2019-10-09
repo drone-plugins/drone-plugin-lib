@@ -37,6 +37,36 @@ import (
 )
 
 //---------------------------------------------------------------------
+// Environment
+//---------------------------------------------------------------------
+
+// EnvironFlags has the cli.Flags for the plugin.Environment.
+func EnvironFlags() []cli.Flag {
+	flags := []cli.Flag{}
+
+	flags = append(flags, BuildFlags()...)
+	flags = append(flags, RepoFlags()...)
+	flags = append(flags, CommitFlags()...)
+	flags = append(flags, StageFlags()...)
+	flags = append(flags, StepFlags()...)
+	flags = append(flags, SemVerFlags()...)
+
+	return flags
+}
+
+// EnvironFromContext creates a plugin.Environment from the cli.Context.
+func EnvironFromContext(ctx *cli.Context) plugin.Environment {
+	return plugin.Environment{
+		Build:  BuildFromContext(ctx),
+		Repo:   RepoFromContext(ctx),
+		Commit: CommitFromContext(ctx),
+		Stage:  StageFromContext(ctx),
+		Step:   StepFromContext(ctx),
+		SemVer: SemVerFromContext(ctx),
+	}
+}
+
+//---------------------------------------------------------------------
 // Build Flags
 //---------------------------------------------------------------------
 

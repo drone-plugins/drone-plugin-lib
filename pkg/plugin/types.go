@@ -8,6 +8,18 @@ package plugin
 import "time"
 
 type (
+	// Environment for the plugin.
+	//
+	// Represents the full Drone environment that the plugin is executing in.
+	Environment struct {
+		Build  Build
+		Repo   Repo
+		Commit Commit
+		Stage  Stage
+		Step   Step
+		SemVer SemVer
+	}
+
 	// Build represents a build of a repository.
 	Build struct {
 		// Action that triggered the build. This value is used to differentiate
@@ -157,6 +169,18 @@ type (
 		Version string
 	}
 )
+
+// Environ creates an Environment from all environment variables used by Drone.
+func Environ() Environment {
+	return Environment{
+		Build:  BuildFromEnv(),
+		Repo:   RepoFromEnv(),
+		Commit: CommitFromEnv(),
+		Stage:  StageFromEnv(),
+		Step:   StepFromEnv(),
+		SemVer: SemVerFromEnv(),
+	}
+}
 
 // BuildFromEnv creates a Build from the environment variables used by Drone.
 func BuildFromEnv() Build {
