@@ -8,6 +8,18 @@ package plugin
 import "time"
 
 type (
+	// Pipeline being executed.
+	//
+	// Represents the full Drone environment that the plugin is executing in.
+	Pipeline struct {
+		Build  Build
+		Repo   Repo
+		Commit Commit
+		Stage  Stage
+		Step   Step
+		SemVer SemVer
+	}
+
 	// Build represents a build of a repository.
 	Build struct {
 		// Action that triggered the build. This value is used to differentiate
