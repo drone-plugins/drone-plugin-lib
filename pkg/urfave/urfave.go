@@ -24,7 +24,7 @@
 //         }
 //         app.Flags = append(
 //             app.Flags,
-//             urfave.CommitFlags()...,
+//             urfave.commitFlags()...,
 //         )
 //     }
 package urfave
@@ -46,25 +46,25 @@ import (
 func PipelineFlags() []cli.Flag {
 	flags := []cli.Flag{}
 
-	flags = append(flags, BuildFlags()...)
-	flags = append(flags, RepoFlags()...)
-	flags = append(flags, CommitFlags()...)
-	flags = append(flags, StageFlags()...)
-	flags = append(flags, StepFlags()...)
-	flags = append(flags, SemVerFlags()...)
+	flags = append(flags, buildFlags()...)
+	flags = append(flags, repoFlags()...)
+	flags = append(flags, commitFlags()...)
+	flags = append(flags, stageFlags()...)
+	flags = append(flags, stepFlags()...)
+	flags = append(flags, semVerFlags()...)
 
 	return flags
 }
 
 // PipelineFromContext creates a plugin.Pipeline from the cli.Context.
-func PipelineFromContext(ctx *cli.Context) plugin.Environment {
+func PipelineFromContext(ctx *cli.Context) plugin.Pipeline {
 	return plugin.Pipeline{
-		Build:  BuildFromContext(ctx),
-		Repo:   RepoFromContext(ctx),
-		Commit: CommitFromContext(ctx),
-		Stage:  StageFromContext(ctx),
-		Step:   StepFromContext(ctx),
-		SemVer: SemVerFromContext(ctx),
+		Build:  buildFromContext(ctx),
+		Repo:   repoFromContext(ctx),
+		Commit: commitFromContext(ctx),
+		Stage:  stageFromContext(ctx),
+		Step:   stepFromContext(ctx),
+		SemVer: semVerFromContext(ctx),
 	}
 }
 
@@ -73,152 +73,122 @@ func PipelineFromContext(ctx *cli.Context) plugin.Environment {
 //---------------------------------------------------------------------
 
 const (
-	// BuildActionFlag corresponds to plugin.Build.Action.
-	BuildActionFlag = "build.action"
-	// BuildCreatedFlag corresponds to plugin.Build.Created.
-	BuildCreatedFlag = "build.created"
-	// BuildDeployToFlag corresponds to plugin.Build.DeployTo.
-	BuildDeployToFlag = "build.deploy-to"
-	// BuildEventFlag corresponds to plugin.Build.Event.
-	BuildEventFlag = "build.event"
-	// BuildFailedStagesFlag corresponds to plugin.Build.FailedStages.
-	BuildFailedStagesFlag = "build.failed-stages"
-	// BuildFailedStepsFlag corresponds to plugin.Build.FailedSteps.
-	BuildFailedStepsFlag = "build.failed-steps"
-	// BuildFinishedFlag corresponds to plugin.Build.Finished.
-	BuildFinishedFlag = "build.finished"
-	// BuildNumberFlag corresponds to plugin.Build.Created.
-	BuildNumberFlag = "build.number"
-	// BuildParentFlag corresponds to plugin.Build.Parent.
-	BuildParentFlag = "build.parent"
-	// BuildPullRequestFlag corresponds to plugin.Build.PullRequest.
-	BuildPullRequestFlag = "build.pull-request"
-	// BuildSourceBranchFlag corresponds to plugin.Build.SourceBranch.
-	BuildSourceBranchFlag = "build.source-branch"
-	// BuildStartedFlag corresponds to plugin.Build.Started.
-	BuildStartedFlag = "build.started"
-	// BuildStatusFlag corresponds to plugin.Build.Status.
-	BuildStatusFlag = "build.status"
-	// BuildTagFlag corresponds to plugin.Build.Tag.
-	BuildTagFlag = "build.tag"
-	// BuildTargetBranchFlag corresponds to plugin.Build.TargetBranch.
-	BuildTargetBranchFlag = "build.target-branch"
+	buildActionFlag       = "build.action"
+	buildCreatedFlag      = "build.created"
+	buildDeployToFlag     = "build.deploy-to"
+	buildEventFlag        = "build.event"
+	buildFailedStagesFlag = "build.failed-stages"
+	buildFailedStepsFlag  = "build.failed-steps"
+	buildFinishedFlag     = "build.finished"
+	buildNumberFlag       = "build.number"
+	buildParentFlag       = "build.parent"
+	buildPullRequestFlag  = "build.pull-request"
+	buildSourceBranchFlag = "build.source-branch"
+	buildStartedFlag      = "build.started"
+	buildStatusFlag       = "build.status"
+	buildTagFlag          = "build.tag"
+	buildTargetBranchFlag = "build.target-branch"
 )
 
-// BuildFlags has the cli.Flags for the plugin.Build.
-func BuildFlags() []cli.Flag {
+// buildFlags has the cli.Flags for the plugin.Build.
+func buildFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   BuildActionFlag,
+			Name:   buildActionFlag,
 			Usage:  "build action",
 			EnvVar: environ.BuildActionEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildCreatedFlag,
+			Name:   buildCreatedFlag,
 			Usage:  "build created",
 			EnvVar: environ.BuildCreatedEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildDeployToFlag,
+			Name:   buildDeployToFlag,
 			Usage:  "build deploy to",
 			EnvVar: environ.BuildDeployToEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildEventFlag,
+			Name:   buildEventFlag,
 			Usage:  "build event",
 			EnvVar: environ.BuildEventEnvVar,
-			Hidden: true,
 		},
 		cli.StringSliceFlag{
-			Name:   BuildFailedStagesFlag,
+			Name:   buildFailedStagesFlag,
 			Usage:  "build failed stages",
 			EnvVar: environ.BuildFailedStagesEnvVar,
-			Hidden: true,
 		},
 		cli.StringSliceFlag{
-			Name:   BuildFailedStepsFlag,
+			Name:   buildFailedStepsFlag,
 			Usage:  "build failed steps",
 			EnvVar: environ.BuildFailedStepsEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildFinishedFlag,
+			Name:   buildFinishedFlag,
 			Usage:  "build finished",
 			EnvVar: environ.BuildFinishedEnvVar,
-			Hidden: true,
 		},
 		cli.IntFlag{
-			Name:   BuildNumberFlag,
+			Name:   buildNumberFlag,
 			Usage:  "build number",
 			EnvVar: environ.BuildNumberEnvVar,
-			Hidden: true,
 		},
 		cli.IntFlag{
-			Name:   BuildParentFlag,
+			Name:   buildParentFlag,
 			Usage:  "build parent",
 			EnvVar: environ.BuildParentEnvVar,
-			Hidden: true,
 		},
 		cli.IntFlag{
-			Name:   BuildPullRequestFlag,
+			Name:   buildPullRequestFlag,
 			Usage:  "build pull request",
 			EnvVar: environ.BuildPullRequestEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildSourceBranchFlag,
+			Name:   buildSourceBranchFlag,
 			Usage:  "build source branch",
 			EnvVar: environ.BuildSourceBranchEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildStartedFlag,
+			Name:   buildStartedFlag,
 			Usage:  "build started",
 			EnvVar: environ.BuildStartedEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildStatusFlag,
+			Name:   buildStatusFlag,
 			Usage:  "build status",
 			EnvVar: environ.BuildStatusEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildTagFlag,
+			Name:   buildTagFlag,
 			Usage:  "build tag",
 			EnvVar: environ.BuildTagEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   BuildTargetBranchFlag,
+			Name:   buildTargetBranchFlag,
 			Usage:  "build target branch",
 			EnvVar: environ.BuildTargetBranchEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// BuildFromContext creates a plugin.Build from the cli.Context.
-func BuildFromContext(ctx *cli.Context) plugin.Build {
+// buildFromContext creates a plugin.Build from the cli.Context.
+func buildFromContext(ctx *cli.Context) plugin.Build {
 	return plugin.Build{
-		Action:       ctx.String(BuildActionFlag),
-		Created:      time.Unix(ctx.Int64(BuildCreatedFlag), 0),
-		DeployTo:     ctx.String(BuildDeployToFlag),
-		Event:        ctx.String(BuildEventFlag),
-		FailedStages: ctx.StringSlice(BuildFailedStagesFlag),
-		FailedSteps:  ctx.StringSlice(BuildFailedStepsFlag),
-		Finished:     time.Unix(ctx.Int64(BuildFinishedFlag), 0),
-		Number:       ctx.Int(BuildNumberFlag),
-		Parent:       ctx.Int(BuildParentFlag),
-		PullRequest:  ctx.Int(BuildPullRequestFlag),
-		SourceBranch: ctx.String(BuildSourceBranchFlag),
-		Started:      time.Unix(ctx.Int64(BuildStartedFlag), 0),
-		Status:       ctx.String(BuildStatusFlag),
-		Tag:          ctx.String(BuildTagFlag),
-		TargetBranch: ctx.String(BuildTargetBranchFlag),
+		Action:       ctx.String(buildActionFlag),
+		Created:      time.Unix(ctx.Int64(buildCreatedFlag), 0),
+		DeployTo:     ctx.String(buildDeployToFlag),
+		Event:        ctx.String(buildEventFlag),
+		FailedStages: ctx.StringSlice(buildFailedStagesFlag),
+		FailedSteps:  ctx.StringSlice(buildFailedStepsFlag),
+		Finished:     time.Unix(ctx.Int64(buildFinishedFlag), 0),
+		Number:       ctx.Int(buildNumberFlag),
+		Parent:       ctx.Int(buildParentFlag),
+		PullRequest:  ctx.Int(buildPullRequestFlag),
+		SourceBranch: ctx.String(buildSourceBranchFlag),
+		Started:      time.Unix(ctx.Int64(buildStartedFlag), 0),
+		Status:       ctx.String(buildStatusFlag),
+		Tag:          ctx.String(buildTagFlag),
+		TargetBranch: ctx.String(buildTargetBranchFlag),
 	}
 }
 
@@ -227,98 +197,80 @@ func BuildFromContext(ctx *cli.Context) plugin.Build {
 //---------------------------------------------------------------------
 
 const (
-	// RepoDefaultBranchFlag corresponds to plugin.Repo.DefaultBranch.
-	RepoDefaultBranchFlag = "repo.branch"
-	// RepoFullNameFlag corresponds to plugin.Repo.FullName.
-	RepoFullNameFlag = "repo.full-name"
-	// RepoLinkFlag corresponds to plugin.Repo.Link.
-	RepoLinkFlag = "repo.link"
-	// RepoNameFlag corresponds to plugin.Repo.Name
-	RepoNameFlag = "repo.name"
-	// RepoOwnerFlag corresponds to plugin.Repo.Owner.
-	RepoOwnerFlag = "repo.owner"
-	// RepoPrivateFlag corresponds to plugin.Repo.Private.
-	RepoPrivateFlag = "repo.private"
-	// RepoRemoteURLFlag corresponds to plugin.Repo.RemoteURL.
-	RepoRemoteURLFlag = "repo.remote-url"
-	// RepoSCMFlag corresponds to plugin.Repo.SCM.
-	RepoSCMFlag = "repo.scm"
-	// RepoVisibilityFlag corresponds to plugin.Repo.Visbility.
-	RepoVisibilityFlag = "repo.visibility"
+	repoDefaultBranchFlag = "repo.branch"
+	repoFullNameFlag      = "repo.full-name"
+	repoLinkFlag          = "repo.link"
+	repoNameFlag          = "repo.name"
+	repoOwnerFlag         = "repo.owner"
+	repoPrivateFlag       = "repo.private"
+	repoRemoteURLFlag     = "repo.remote-url"
+	repoSCMFlag           = "repo.scm"
+	repoVisibilityFlag    = "repo.visibility"
 )
 
-// RepoFlags has the cli.Flags for the plugin.Repo
-func RepoFlags() []cli.Flag {
+// repoFlags has the cli.Flags for the plugin.Repo
+func repoFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   RepoDefaultBranchFlag,
+			Name:   repoDefaultBranchFlag,
 			Usage:  "repo default branch",
 			EnvVar: environ.RepoDefaultBranchEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoFullNameFlag,
+			Name:   repoFullNameFlag,
 			Usage:  "repo full name",
 			EnvVar: environ.RepoFullNameEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoLinkFlag,
+			Name:   repoLinkFlag,
 			Usage:  "repo link",
 			EnvVar: environ.RepoLinkEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoNameFlag,
+			Name:   repoNameFlag,
 			Usage:  "repo name",
 			EnvVar: environ.RepoNameEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoOwnerFlag,
+			Name:   repoOwnerFlag,
 			Usage:  "repo owner",
 			EnvVar: environ.RepoOwnerEnvVar,
-			Hidden: true,
 		},
 		cli.BoolFlag{
-			Name:   RepoPrivateFlag,
+			Name:   repoPrivateFlag,
 			Usage:  "repo private",
 			EnvVar: environ.RepoPrivateEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoRemoteURLFlag,
+			Name:   repoRemoteURLFlag,
 			Usage:  "repo remote url",
 			EnvVar: environ.RepoRemoteURLEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoSCMFlag,
+			Name:   repoSCMFlag,
 			Usage:  "repo scm",
 			EnvVar: environ.RepoSCMEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   RepoVisibilityFlag,
+			Name:   repoVisibilityFlag,
 			Usage:  "repo visibility",
 			EnvVar: environ.RepoVisibilityEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// RepoFromContext creates a plugin.Repo from the cli.Context.
-func RepoFromContext(ctx *cli.Context) plugin.Repo {
+// repoFromContext creates a plugin.Repo from the cli.Context.
+func repoFromContext(ctx *cli.Context) plugin.Repo {
 	return plugin.Repo{
-		DefaultBranch: ctx.String(RepoDefaultBranchFlag),
-		FullName:      ctx.String(RepoFullNameFlag),
-		Link:          ctx.String(RepoLinkFlag),
-		Name:          ctx.String(RepoNameFlag),
-		Owner:         ctx.String(RepoOwnerFlag),
-		Private:       ctx.Bool(RepoPrivateFlag),
-		RemoteURL:     ctx.String(RepoRemoteURLFlag),
-		SCM:           ctx.String(RepoSCMFlag),
-		Visibility:    ctx.String(RepoVisibilityFlag),
+		DefaultBranch: ctx.String(repoDefaultBranchFlag),
+		FullName:      ctx.String(repoFullNameFlag),
+		Link:          ctx.String(repoLinkFlag),
+		Name:          ctx.String(repoNameFlag),
+		Owner:         ctx.String(repoOwnerFlag),
+		Private:       ctx.Bool(repoPrivateFlag),
+		RemoteURL:     ctx.String(repoRemoteURLFlag),
+		SCM:           ctx.String(repoSCMFlag),
+		Visibility:    ctx.String(repoVisibilityFlag),
 	}
 }
 
@@ -327,116 +279,94 @@ func RepoFromContext(ctx *cli.Context) plugin.Repo {
 //---------------------------------------------------------------------
 
 const (
-	// CommitAfterFlag corresponds to plugin.Commit.After.
-	CommitAfterFlag = "commit.after"
-	// CommitAuthorFlag corresponds to plugin.Commit.Author.
-	CommitAuthorFlag = "commit.author"
-	// CommitAuthorAvatarFlag corresponds to plugin.Commit.AuthorAvatar.
-	CommitAuthorAvatarFlag = "commit.author-avatar"
-	// CommitAuthorEmailFlag corresponds to plugin.Commit.AuthorEmail.
-	CommitAuthorEmailFlag = "commit.author-email"
-	// CommitAuthorNameFlag corresponds to plugin.Commit.AuthorName.
-	CommitAuthorNameFlag = "commit.author-name"
-	// CommitBeforeFlag corresponds to plugin.Commit.Before.
-	CommitBeforeFlag = "commit.before"
-	// CommitBranchFlag corresponds to plugin.Commit.Branch.
-	CommitBranchFlag = "commit.branch"
-	// CommitLinkFlag corresponds to plugin.Commit.Link.
-	CommitLinkFlag = "commit.link"
-	// CommitMessageFlag corresponds to plugin.Commit.Message.
-	CommitMessageFlag = "commit.message"
-	// CommitRefFlag corresponds to plugin.Commit.Ref.
-	CommitRefFlag = "commit.ref"
-	// CommitSHAFlag corresponds to plugin.Commit.SHA.
-	CommitSHAFlag = "commit.sha"
+	commitAfterFlag        = "commit.after"
+	commitAuthorFlag       = "commit.author"
+	commitAuthorAvatarFlag = "commit.author-avatar"
+	commitAuthorEmailFlag  = "commit.author-email"
+	commitAuthorNameFlag   = "commit.author-name"
+	commitBeforeFlag       = "commit.before"
+	commitBranchFlag       = "commit.branch"
+	commitLinkFlag         = "commit.link"
+	commitMessageFlag      = "commit.message"
+	commitRefFlag          = "commit.ref"
+	commitSHAFlag          = "commit.sha"
 )
 
-// CommitFlags has the cli.Flags for the plugin.Commit.
-func CommitFlags() []cli.Flag {
+// commitFlags has the cli.Flags for the plugin.Commit.
+func commitFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   CommitAfterFlag,
+			Name:   commitAfterFlag,
 			Usage:  "commit after",
 			EnvVar: environ.CommitAfterEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitAuthorFlag,
+			Name:   commitAuthorFlag,
 			Usage:  "commit author",
 			EnvVar: environ.CommitAuthorEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitAuthorAvatarFlag,
+			Name:   commitAuthorAvatarFlag,
 			Usage:  "commit author avatar",
 			EnvVar: environ.CommitAuthorAvatarEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitAuthorEmailFlag,
+			Name:   commitAuthorEmailFlag,
 			Usage:  "commit author email",
 			EnvVar: environ.CommitAuthorEmailEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitAuthorNameFlag,
+			Name:   commitAuthorNameFlag,
 			Usage:  "commit author name",
 			EnvVar: environ.CommitAuthorNameEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitBeforeFlag,
+			Name:   commitBeforeFlag,
 			Usage:  "commit before",
 			EnvVar: environ.CommitBeforeEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitBranchFlag,
+			Name:   commitBranchFlag,
 			Usage:  "commit branch",
 			EnvVar: environ.CommitBranchEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitLinkFlag,
+			Name:   commitLinkFlag,
 			Usage:  "commit link",
 			EnvVar: environ.CommitLinkEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitMessageFlag,
+			Name:   commitMessageFlag,
 			Usage:  "commit message",
 			EnvVar: environ.CommitMessageEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitRefFlag,
+			Name:   commitRefFlag,
 			Usage:  "commit ref",
 			EnvVar: environ.CommitRefEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   CommitSHAFlag,
+			Name:   commitSHAFlag,
 			Usage:  "commit sha",
 			EnvVar: environ.CommitSHAEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// CommitFromContext creates a plugin.Commit from the cli.Context.
-func CommitFromContext(ctx *cli.Context) plugin.Commit {
+// commitFromContext creates a plugin.Commit from the cli.Context.
+func commitFromContext(ctx *cli.Context) plugin.Commit {
 	return plugin.Commit{
-		After:        ctx.String(CommitAfterFlag),
-		Author:       ctx.String(CommitAuthorFlag),
-		AuthorAvatar: ctx.String(CommitAuthorAvatarFlag),
-		AuthorEmail:  ctx.String(CommitAuthorEmailFlag),
-		AuthorName:   ctx.String(CommitAuthorNameFlag),
-		Before:       ctx.String(CommitBeforeFlag),
-		Branch:       ctx.String(CommitBranchFlag),
-		Link:         ctx.String(CommitLinkFlag),
-		Message:      ctx.String(CommitMessageFlag),
-		Ref:          ctx.String(CommitRefFlag),
-		SHA:          ctx.String(CommitSHAFlag),
+		After:        ctx.String(commitAfterFlag),
+		Author:       ctx.String(commitAuthorFlag),
+		AuthorAvatar: ctx.String(commitAuthorAvatarFlag),
+		AuthorEmail:  ctx.String(commitAuthorEmailFlag),
+		AuthorName:   ctx.String(commitAuthorNameFlag),
+		Before:       ctx.String(commitBeforeFlag),
+		Branch:       ctx.String(commitBranchFlag),
+		Link:         ctx.String(commitLinkFlag),
+		Message:      ctx.String(commitMessageFlag),
+		Ref:          ctx.String(commitRefFlag),
+		SHA:          ctx.String(commitSHAFlag),
 	}
 }
 
@@ -445,124 +375,98 @@ func CommitFromContext(ctx *cli.Context) plugin.Commit {
 //---------------------------------------------------------------------
 
 const (
-	// StageArchFlag corresponds to plugin.Stage.Arch.
-	StageArchFlag = "stage.arch"
-	// StageDependsOnFlag corresponds to plugin.Stage.DependsOn.
-	StageDependsOnFlag = "stage.depends-on"
-	// StageFinishedFlag corresponds to plugin.Stage.Finished.
-	StageFinishedFlag = "stage.finished"
-	// StageKindFlag corresponds Stage.Kind.
-	StageKindFlag = "stage.kind"
-	// StageMachineFlag corresponds to plugin.Stage.Machine.
-	StageMachineFlag = "stage.machine"
-	// StageNameFlag corresponds to plugin.Stage.Name.
-	StageNameFlag = "stage.name"
-	// StageNumberFlag corresponds to plugin.Stage.Number.
-	StageNumberFlag = "stage.number"
-	// StageOSFlag corresponds to plugin.Stage.OS.
-	StageOSFlag = "stage.os"
-	// StageStartedFlag corresponds to plugin.Stage.Started.
-	StageStartedFlag = "stage.started"
-	// StageStatusFlag corresponds to plugin.Stage.Status.
-	StageStatusFlag = "stage.status"
-	// StageTypeFlag corresponds to plugin.Stage.Type.
-	StageTypeFlag = "stage.type"
-	// StageVariantFlag corresponds to plugin.Stage.Variant.
-	StageVariantFlag = "stage.variant"
-	// StageVersionFlag corresponds to plugin.Stage.Version.
-	StageVersionFlag = "stage.version"
+	stageArchFlag      = "stage.arch"
+	stageDependsOnFlag = "stage.depends-on"
+	stageFinishedFlag  = "stage.finished"
+	stageKindFlag      = "stage.kind"
+	stageMachineFlag   = "stage.machine"
+	stageNameFlag      = "stage.name"
+	stageNumberFlag    = "stage.number"
+	stageOSFlag        = "stage.os"
+	stageStartedFlag   = "stage.started"
+	stageStatusFlag    = "stage.status"
+	stageTypeFlag      = "stage.type"
+	stageVariantFlag   = "stage.variant"
+	stageVersionFlag   = "stage.version"
 )
 
-// StageFlags has the cli.Flags for the plugin.Stage
-func StageFlags() []cli.Flag {
+// stageFlags has the cli.Flags for the plugin.Stage
+func stageFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   StageArchFlag,
+			Name:   stageArchFlag,
 			Usage:  "stage arch",
 			EnvVar: environ.StageArchEnvVar,
-			Hidden: true,
 		},
 		cli.StringSliceFlag{
-			Name:   StageDependsOnFlag,
+			Name:   stageDependsOnFlag,
 			Usage:  "stage depends on",
 			EnvVar: environ.StageDependsOnEnvVar,
-			Hidden: true,
 		},
 		cli.Int64Flag{
-			Name:   StageFinishedFlag,
+			Name:   stageFinishedFlag,
 			Usage:  "stage finished",
 			EnvVar: environ.StageFinishedEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageKindFlag,
+			Name:   stageKindFlag,
 			Usage:  "stage kind",
 			EnvVar: environ.StageKindEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageMachineFlag,
+			Name:   stageMachineFlag,
 			Usage:  "stage machine",
 			EnvVar: environ.StageMachineEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageNameFlag,
+			Name:   stageNameFlag,
 			Usage:  "stage name",
 			EnvVar: environ.StageNameEnvVar,
-			Hidden: true,
 		}, cli.IntFlag{
-			Name:   StageNumberFlag,
+			Name:   stageNumberFlag,
 			Usage:  "stage number",
 			EnvVar: environ.StageNumberEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageOSFlag,
+			Name:   stageOSFlag,
 			Usage:  "stage os",
 			EnvVar: environ.StageOSEnvVar,
-			Hidden: true,
 		}, cli.Int64Flag{
-			Name:   StageStartedFlag,
+			Name:   stageStartedFlag,
 			Usage:  "stage started",
 			EnvVar: environ.StageStartedEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageStatusFlag,
+			Name:   stageStatusFlag,
 			Usage:  "stage status",
 			EnvVar: environ.StageStatusEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageTypeFlag,
+			Name:   stageTypeFlag,
 			Usage:  "stage type",
 			EnvVar: environ.StageTypeEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageVariantFlag,
+			Name:   stageVariantFlag,
 			Usage:  "stage variant",
 			EnvVar: environ.StageVariantEnvVar,
-			Hidden: true,
 		}, cli.StringFlag{
-			Name:   StageVersionFlag,
+			Name:   stageVersionFlag,
 			Usage:  "stage version",
 			EnvVar: environ.StageVersionEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// StageFromContext creates a plugin.Stage from the cli.Context.
-func StageFromContext(ctx *cli.Context) plugin.Stage {
+// stageFromContext creates a plugin.Stage from the cli.Context.
+func stageFromContext(ctx *cli.Context) plugin.Stage {
 	return plugin.Stage{
-		Arch:      ctx.String(StageArchFlag),
-		DependsOn: ctx.StringSlice(StageDependsOnFlag),
-		Finished:  time.Unix(ctx.Int64(StageFinishedFlag), 0),
-		Kind:      ctx.String(StageKindFlag),
-		Machine:   ctx.String(StageMachineFlag),
-		Name:      ctx.String(StageNameFlag),
-		Number:    ctx.Int(StageNumberFlag),
-		OS:        ctx.String(StageOSFlag),
-		Started:   time.Unix(ctx.Int64(StageStartedFlag), 0),
-		Status:    ctx.String(StageStatusFlag),
-		Type:      ctx.String(StageTypeFlag),
-		Variant:   ctx.String(StageVariantFlag),
-		Version:   ctx.String(StageVersionFlag),
+		Arch:      ctx.String(stageArchFlag),
+		DependsOn: ctx.StringSlice(stageDependsOnFlag),
+		Finished:  time.Unix(ctx.Int64(stageFinishedFlag), 0),
+		Kind:      ctx.String(stageKindFlag),
+		Machine:   ctx.String(stageMachineFlag),
+		Name:      ctx.String(stageNameFlag),
+		Number:    ctx.Int(stageNumberFlag),
+		OS:        ctx.String(stageOSFlag),
+		Started:   time.Unix(ctx.Int64(stageStartedFlag), 0),
+		Status:    ctx.String(stageStatusFlag),
+		Type:      ctx.String(stageTypeFlag),
+		Variant:   ctx.String(stageVariantFlag),
+		Version:   ctx.String(stageVersionFlag),
 	}
 }
 
@@ -571,35 +475,33 @@ func StageFromContext(ctx *cli.Context) plugin.Stage {
 //---------------------------------------------------------------------
 
 const (
-	// StepNameFlag corresponds to plugin.Step.Name.
-	StepNameFlag = "step.name"
-	// StepNumberFlag corresponds to plugin.Step.Number.
-	StepNumberFlag = "step.number"
+	// stepNameFlag corresponds to plugin.Step.Name.
+	stepNameFlag = "step.name"
+	// stepNumberFlag corresponds to plugin.Step.Number.
+	stepNumberFlag = "step.number"
 )
 
-// StepFlags has the cli.Flags for the plugin.Step.
-func StepFlags() []cli.Flag {
+// stepFlags has the cli.Flags for the plugin.Step.
+func stepFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   StepNameFlag,
+			Name:   stepNameFlag,
 			Usage:  "step name",
 			EnvVar: environ.StepNameEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   StepNumberFlag,
+			Name:   stepNumberFlag,
 			Usage:  "step number",
 			EnvVar: environ.StepNumberEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// StepFromContext creates a plugin.Step from the cli.Context.
-func StepFromContext(ctx *cli.Context) plugin.Step {
+// stepFromContext creates a plugin.Step from the cli.Context.
+func stepFromContext(ctx *cli.Context) plugin.Step {
 	return plugin.Step{
-		Name:   ctx.String(StepNameFlag),
-		Number: ctx.Int(StepNumberFlag),
+		Name:   ctx.String(stepNameFlag),
+		Number: ctx.Int(stepNumberFlag),
 	}
 }
 
@@ -608,88 +510,72 @@ func StepFromContext(ctx *cli.Context) plugin.Step {
 //---------------------------------------------------------------------
 
 const (
-	// SemVerBuildFlag corresponds to plugin.SemVer.Build.
-	SemVerBuildFlag = "semver.build"
-	// SemVerErrorFlag corresponds to plugin.SemVer.Error.
-	SemVerErrorFlag = "semver.error"
-	// SemVerMajorFlag corresponds to plugin.SemVer.Major.
-	SemVerMajorFlag = "semver.major"
-	// SemVerMinorFlag corresponds to plugin.SemVer.Minor.
-	SemVerMinorFlag = "semver.minor"
-	// SemVerPatchFlag corresponds to plugin.SemVer.Patch.
-	SemVerPatchFlag = "semver.patch"
-	// SemVerPrereleaseFlag corresponds to plugin.SemVer.Prerelease
-	SemVerPrereleaseFlag = "semver.prerelease"
-	// SemVerShortFlag corresponds to plugin.SemVer.Short.
-	SemVerShortFlag = "semver.short"
-	// SemVerVersionFlag corresponds to plugin.SemVer.Version
-	SemVerVersionFlag = "semver.version"
+	semVerBuildFlag      = "semver.build"
+	semVerErrorFlag      = "semver.error"
+	semVerMajorFlag      = "semver.major"
+	semVerMinorFlag      = "semver.minor"
+	semVerPatchFlag      = "semver.patch"
+	semVerPrereleaseFlag = "semver.prerelease"
+	semVerShortFlag      = "semver.short"
+	semVerVersionFlag    = "semver.version"
 )
 
-// SemVerFlags has the cli.Flags for the plugin.SemVer.
-func SemVerFlags() []cli.Flag {
+// semVerFlags has the cli.Flags for the plugin.SemVer.
+func semVerFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:   SemVerBuildFlag,
+			Name:   semVerBuildFlag,
 			Usage:  "semver build",
 			EnvVar: environ.SemVerBuildEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerErrorFlag,
+			Name:   semVerErrorFlag,
 			Usage:  "semver error",
 			EnvVar: environ.SemVerErrorEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerMajorFlag,
+			Name:   semVerMajorFlag,
 			Usage:  "semver major",
 			EnvVar: environ.SemVerMajorEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerMinorFlag,
+			Name:   semVerMinorFlag,
 			Usage:  "semver minor",
 			EnvVar: environ.SemVerMinorEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerPatchFlag,
+			Name:   semVerPatchFlag,
 			Usage:  "semver patch",
 			EnvVar: environ.SemVerPatchEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerPrereleaseFlag,
+			Name:   semVerPrereleaseFlag,
 			Usage:  "semver prerelease",
 			EnvVar: environ.SemVerPrereleaseEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerShortFlag,
+			Name:   semVerShortFlag,
 			Usage:  "semver short",
 			EnvVar: environ.SemVerShortEnvVar,
-			Hidden: true,
 		},
 		cli.StringFlag{
-			Name:   SemVerVersionFlag,
+			Name:   semVerVersionFlag,
 			Usage:  "semver version",
 			EnvVar: environ.SemVerVersionEnvVar,
-			Hidden: true,
 		},
 	}
 }
 
-// SemVerFromContext creates a plugin.Step from the cli.Context.
-func SemVerFromContext(ctx *cli.Context) plugin.SemVer {
+// semVerFromContext creates a plugin.Step from the cli.Context.
+func semVerFromContext(ctx *cli.Context) plugin.SemVer {
 	return plugin.SemVer{
-		Build:      ctx.String(SemVerBuildFlag),
-		Error:      ctx.String(SemVerErrorFlag),
-		Major:      ctx.String(SemVerMajorFlag),
-		Minor:      ctx.String(SemVerMinorFlag),
-		Patch:      ctx.String(SemVerPatchFlag),
-		Prerelease: ctx.String(SemVerPrereleaseFlag),
-		Short:      ctx.String(SemVerShortFlag),
-		Version:    ctx.String(SemVerVersionFlag),
+		Build:      ctx.String(semVerBuildFlag),
+		Error:      ctx.String(semVerErrorFlag),
+		Major:      ctx.String(semVerMajorFlag),
+		Minor:      ctx.String(semVerMinorFlag),
+		Patch:      ctx.String(semVerPatchFlag),
+		Prerelease: ctx.String(semVerPrereleaseFlag),
+		Short:      ctx.String(semVerShortFlag),
+		Version:    ctx.String(semVerVersionFlag),
 	}
 }
