@@ -8,10 +8,10 @@ package plugin
 import "time"
 
 type (
-	// Environment for the plugin.
+	// Pipeline being executed.
 	//
 	// Represents the full Drone environment that the plugin is executing in.
-	Environment struct {
+	Pipeline struct {
 		Build  Build
 		Repo   Repo
 		Commit Commit

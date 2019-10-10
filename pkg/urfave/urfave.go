@@ -40,8 +40,8 @@ import (
 // Environment
 //---------------------------------------------------------------------
 
-// EnvironFlags has the cli.Flags for the plugin.Environment.
-func EnvironFlags() []cli.Flag {
+// PipelineFlags has the cli.Flags for the plugin.Pipeline.
+func PipelineFlags() []cli.Flag {
 	flags := []cli.Flag{}
 
 	flags = append(flags, BuildFlags()...)
@@ -54,9 +54,9 @@ func EnvironFlags() []cli.Flag {
 	return flags
 }
 
-// EnvironFromContext creates a plugin.Environment from the cli.Context.
-func EnvironFromContext(ctx *cli.Context) plugin.Environment {
-	return plugin.Environment{
+// PipelineFromContext creates a plugin.Pipeline from the cli.Context.
+func PipelineFromContext(ctx *cli.Context) plugin.Environment {
+	return plugin.Pipeline{
 		Build:  BuildFromContext(ctx),
 		Repo:   RepoFromContext(ctx),
 		Commit: CommitFromContext(ctx),
