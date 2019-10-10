@@ -41,36 +41,38 @@ import (
 //---------------------------------------------------------------------
 
 const (
+	// BuildFlagType is the prefix for all the plugin.Build flags.
+	BuildFlagType = "build."
 	// BuildActionFlag corresponds to plugin.Build.Action.
-	BuildActionFlag = "build.action"
+	BuildActionFlag = BuildFlagType + "action"
 	// BuildCreatedFlag corresponds to plugin.Build.Created.
-	BuildCreatedFlag = "build.created"
+	BuildCreatedFlag = BuildFlagType + "created"
 	// BuildDeployToFlag corresponds to plugin.Build.DeployTo.
-	BuildDeployToFlag = "build.deploy-to"
+	BuildDeployToFlag = BuildFlagType + "deploy-to"
 	// BuildEventFlag corresponds to plugin.Build.Event.
-	BuildEventFlag = "build.event"
+	BuildEventFlag = BuildFlagType + "event"
 	// BuildFailedStagesFlag corresponds to plugin.Build.FailedStages.
-	BuildFailedStagesFlag = "build.failed-stages"
+	BuildFailedStagesFlag = BuildFlagType + "failed-stages"
 	// BuildFailedStepsFlag corresponds to plugin.Build.FailedSteps.
-	BuildFailedStepsFlag = "build.failed-steps"
+	BuildFailedStepsFlag = BuildFlagType + "failed-steps"
 	// BuildFinishedFlag corresponds to plugin.Build.Finished.
-	BuildFinishedFlag = "build.finished"
+	BuildFinishedFlag = BuildFlagType + "finished"
 	// BuildNumberFlag corresponds to plugin.Build.Created.
-	BuildNumberFlag = "build.number"
+	BuildNumberFlag = BuildFlagType + "number"
 	// BuildParentFlag corresponds to plugin.Build.Parent.
-	BuildParentFlag = "build.parent"
+	BuildParentFlag = BuildFlagType + "parent"
 	// BuildPullRequestFlag corresponds to plugin.Build.PullRequest.
-	BuildPullRequestFlag = "build.pull-request"
+	BuildPullRequestFlag = BuildFlagType + "pull-request"
 	// BuildSourceBranchFlag corresponds to plugin.Build.SourceBranch.
-	BuildSourceBranchFlag = "build.source-branch"
+	BuildSourceBranchFlag = BuildFlagType + "source-branch"
 	// BuildStartedFlag corresponds to plugin.Build.Started.
-	BuildStartedFlag = "build.started"
+	BuildStartedFlag = BuildFlagType + "started"
 	// BuildStatusFlag corresponds to plugin.Build.Status.
-	BuildStatusFlag = "build.status"
+	BuildStatusFlag = BuildFlagType + "status"
 	// BuildTagFlag corresponds to plugin.Build.Tag.
-	BuildTagFlag = "build.tag"
+	BuildTagFlag = BuildFlagType + "tag"
 	// BuildTargetBranchFlag corresponds to plugin.Build.TargetBranch.
-	BuildTargetBranchFlag = "build.target-branch"
+	BuildTargetBranchFlag = BuildFlagType + "target-branch"
 )
 
 // BuildFlags has the cli.Flags for the plugin.Build.
@@ -195,24 +197,26 @@ func BuildFromContext(ctx *cli.Context) plugin.Build {
 //---------------------------------------------------------------------
 
 const (
+	// RepoFlagType is the prefix for all the plugin.Repo flags.
+	RepoFlagType = "repo."
 	// RepoDefaultBranchFlag corresponds to plugin.Repo.DefaultBranch.
-	RepoDefaultBranchFlag = "repo.branch"
+	RepoDefaultBranchFlag = RepoFlagType + "branch"
 	// RepoFullNameFlag corresponds to plugin.Repo.FullName.
-	RepoFullNameFlag = "repo.full-name"
+	RepoFullNameFlag = RepoFlagType + "full-name"
 	// RepoLinkFlag corresponds to plugin.Repo.Link.
-	RepoLinkFlag = "repo.link"
+	RepoLinkFlag = RepoFlagType + "link"
 	// RepoNameFlag corresponds to plugin.Repo.Name
-	RepoNameFlag = "repo.name"
+	RepoNameFlag = RepoFlagType + "name"
 	// RepoOwnerFlag corresponds to plugin.Repo.Owner.
-	RepoOwnerFlag = "repo.owner"
+	RepoOwnerFlag = RepoFlagType + "owner"
 	// RepoPrivateFlag corresponds to plugin.Repo.Private.
-	RepoPrivateFlag = "repo.private"
+	RepoPrivateFlag = RepoFlagType + "private"
 	// RepoRemoteURLFlag corresponds to plugin.Repo.RemoteURL.
-	RepoRemoteURLFlag = "repo.remote-url"
+	RepoRemoteURLFlag = RepoFlagType + "remote-url"
 	// RepoSCMFlag corresponds to plugin.Repo.SCM.
-	RepoSCMFlag = "repo.scm"
+	RepoSCMFlag = RepoFlagType + "scm"
 	// RepoVisibilityFlag corresponds to plugin.Repo.Visbility.
-	RepoVisibilityFlag = "repo.visibility"
+	RepoVisibilityFlag = RepoFlagType + "visibility"
 )
 
 // RepoFlags has the cli.Flags for the plugin.Repo
@@ -295,28 +299,30 @@ func RepoFromContext(ctx *cli.Context) plugin.Repo {
 //---------------------------------------------------------------------
 
 const (
+	// CommitFlagType is the prefix for all the plugin.Commit flags.
+	CommitFlagType = "commit."
 	// CommitAfterFlag corresponds to plugin.Commit.After.
-	CommitAfterFlag = "commit.after"
+	CommitAfterFlag = CommitFlagType + "after"
 	// CommitAuthorFlag corresponds to plugin.Commit.Author.
-	CommitAuthorFlag = "commit.author"
+	CommitAuthorFlag = CommitFlagType + "author"
 	// CommitAuthorAvatarFlag corresponds to plugin.Commit.AuthorAvatar.
-	CommitAuthorAvatarFlag = "commit.author-avatar"
+	CommitAuthorAvatarFlag = CommitFlagType + "author-avatar"
 	// CommitAuthorEmailFlag corresponds to plugin.Commit.AuthorEmail.
-	CommitAuthorEmailFlag = "commit.author-email"
+	CommitAuthorEmailFlag = CommitFlagType + "author-email"
 	// CommitAuthorNameFlag corresponds to plugin.Commit.AuthorName.
-	CommitAuthorNameFlag = "commit.author-name"
+	CommitAuthorNameFlag = CommitFlagType + "author-name"
 	// CommitBeforeFlag corresponds to plugin.Commit.Before.
-	CommitBeforeFlag = "commit.before"
+	CommitBeforeFlag = CommitFlagType + "before"
 	// CommitBranchFlag corresponds to plugin.Commit.Branch.
-	CommitBranchFlag = "commit.branch"
+	CommitBranchFlag = CommitFlagType + "branch"
 	// CommitLinkFlag corresponds to plugin.Commit.Link.
-	CommitLinkFlag = "commit.link"
+	CommitLinkFlag = CommitFlagType + "link"
 	// CommitMessageFlag corresponds to plugin.Commit.Message.
-	CommitMessageFlag = "commit.message"
+	CommitMessageFlag = CommitFlagType + "message"
 	// CommitRefFlag corresponds to plugin.Commit.Ref.
-	CommitRefFlag = "commit.ref"
+	CommitRefFlag = CommitFlagType + "ref"
 	// CommitSHAFlag corresponds to plugin.Commit.SHA.
-	CommitSHAFlag = "commit.sha"
+	CommitSHAFlag = CommitFlagType + "sha"
 )
 
 // CommitFlags has the cli.Flags for the plugin.Commit.
@@ -413,32 +419,34 @@ func CommitFromContext(ctx *cli.Context) plugin.Commit {
 //---------------------------------------------------------------------
 
 const (
+	// StageFlagType is the prefix for all the plugin.Stage flags.
+	StageFlagType = "stage."
 	// StageArchFlag corresponds to plugin.Stage.Arch.
-	StageArchFlag = "stage.arch"
+	StageArchFlag = StageFlagType + "arch"
 	// StageDependsOnFlag corresponds to plugin.Stage.DependsOn.
-	StageDependsOnFlag = "stage.depends-on"
+	StageDependsOnFlag = StageFlagType + "depends-on"
 	// StageFinishedFlag corresponds to plugin.Stage.Finished.
-	StageFinishedFlag = "stage.finished"
+	StageFinishedFlag = StageFlagType + "finished"
 	// StageKindFlag corresponds Stage.Kind.
-	StageKindFlag = "stage.kind"
+	StageKindFlag = StageFlagType + "kind"
 	// StageMachineFlag corresponds to plugin.Stage.Machine.
-	StageMachineFlag = "stage.machine"
+	StageMachineFlag = StageFlagType + "machine"
 	// StageNameFlag corresponds to plugin.Stage.Name.
-	StageNameFlag = "stage.name"
+	StageNameFlag = StageFlagType + "name"
 	// StageNumberFlag corresponds to plugin.Stage.Number.
-	StageNumberFlag = "stage.number"
+	StageNumberFlag = StageFlagType + "number"
 	// StageOSFlag corresponds to plugin.Stage.OS.
-	StageOSFlag = "stage.os"
+	StageOSFlag = StageFlagType + "os"
 	// StageStartedFlag corresponds to plugin.Stage.Started.
-	StageStartedFlag = "stage.started"
+	StageStartedFlag = StageFlagType + "started"
 	// StageStatusFlag corresponds to plugin.Stage.Status.
-	StageStatusFlag = "stage.status"
+	StageStatusFlag = StageFlagType + "status"
 	// StageTypeFlag corresponds to plugin.Stage.Type.
-	StageTypeFlag = "stage.type"
+	StageTypeFlag = StageFlagType + "type"
 	// StageVariantFlag corresponds to plugin.Stage.Variant.
-	StageVariantFlag = "stage.variant"
+	StageVariantFlag = StageFlagType + "variant"
 	// StageVersionFlag corresponds to plugin.Stage.Version.
-	StageVersionFlag = "stage.version"
+	StageVersionFlag = StageFlagType + "version"
 )
 
 // StageFlags has the cli.Flags for the plugin.Stage
@@ -539,10 +547,12 @@ func StageFromContext(ctx *cli.Context) plugin.Stage {
 //---------------------------------------------------------------------
 
 const (
+	// StepFlagType is the prefix for all the plugin.Step flags.
+	StepFlagType = "step"
 	// StepNameFlag corresponds to plugin.Step.Name.
-	StepNameFlag = "step.name"
+	StepNameFlag = StepFlagType + "name"
 	// StepNumberFlag corresponds to plugin.Step.Number.
-	StepNumberFlag = "step.number"
+	StepNumberFlag = StepFlagType + "number"
 )
 
 // StepFlags has the cli.Flags for the plugin.Step.
@@ -576,22 +586,24 @@ func StepFromContext(ctx *cli.Context) plugin.Step {
 //---------------------------------------------------------------------
 
 const (
+	// SemVerFlagType is the prefix for all the plugin.SenVer flags.
+	SemVerFlagType = "semver"
 	// SemVerBuildFlag corresponds to plugin.SemVer.Build.
-	SemVerBuildFlag = "semver.build"
+	SemVerBuildFlag = SemVerFlagType + ".build"
 	// SemVerErrorFlag corresponds to plugin.SemVer.Error.
-	SemVerErrorFlag = "semver.error"
+	SemVerErrorFlag = SemVerFlagType + ".error"
 	// SemVerMajorFlag corresponds to plugin.SemVer.Major.
-	SemVerMajorFlag = "semver.major"
+	SemVerMajorFlag = SemVerFlagType + ".major"
 	// SemVerMinorFlag corresponds to plugin.SemVer.Minor.
-	SemVerMinorFlag = "semver.minor"
+	SemVerMinorFlag = SemVerFlagType + ".minor"
 	// SemVerPatchFlag corresponds to plugin.SemVer.Patch.
-	SemVerPatchFlag = "semver.patch"
+	SemVerPatchFlag = SemVerFlagType + ".patch"
 	// SemVerPrereleaseFlag corresponds to plugin.SemVer.Prerelease
-	SemVerPrereleaseFlag = "semver.prerelease"
+	SemVerPrereleaseFlag = SemVerFlagType + ".prerelease"
 	// SemVerShortFlag corresponds to plugin.SemVer.Short.
-	SemVerShortFlag = "semver.short"
+	SemVerShortFlag = SemVerFlagType + ".short"
 	// SemVerVersionFlag corresponds to plugin.SemVer.Version
-	SemVerVersionFlag = "semver.version"
+	SemVerVersionFlag = SemVerFlagType + ".version"
 )
 
 // SemVerFlags has the cli.Flags for the plugin.SemVer.
