@@ -24,8 +24,13 @@
 //         }
 //         app.Flags = append(
 //             app.Flags,
-//             urfave.commitFlags()...,
+//             urfave.PipelineFlags()...,
 //         )
+//     }
+//
+//     func run(ctx *cli.Context) {
+//         	pipeline := urfave.PipelineFromContext(ctx)
+//          ....
 //     }
 package urfave
 
