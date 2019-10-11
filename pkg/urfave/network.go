@@ -7,6 +7,7 @@ package urfave
 
 import (
 	"context"
+	"crypto/tls"
 	"net"
 	"net/http"
 	"time"
@@ -31,15 +32,15 @@ type Network struct {
 	Client *http.Client
 }
 
-const networkSSLVerifyFlag = "transport.ssl-verify"
+const networkSkipVerifyFlag = "transport.skip-verify"
 
 // networkFlags has the cli.Flags for the Transport.
 func networkFlags() []cli.Flag {
 	return []cli.Flag{
-		cli.BoolFlag{
-			Name:   networkSSLVerifyFlag,
-			Usage:  "transport ssl verify",
-			EnvVar: "PLUGIN_SSL_VERIFY",
+		cli.BoolTFlag{
+			Name:   networkSkipVerifyFlag,
+			Usage:  "skip ssl verify",
+			EnvVar: "PLUGIN_SKIP_VERIFY",
 		},
 	}
 }
@@ -47,20 +48,25 @@ func networkFlags() []cli.Flag {
 // NetworkFromContext creates a Transport from the cli.Context.
 func NetworkFromContext(ctx *cli.Context) Network {
 	// Create the client
-	client := &http.Client{
-		Transport: &http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   30 * time.Second,
-				KeepAlive: 30 * time.Second,
-				DualStack: true,
-			}).DialContext,
-			ForceAttemptHTTP2:     true,
-			MaxIdleConns:          100,
-			IdleConnTimeout:       90 * time.Second,
-			TLSHandshakeTimeout:   10 * time.Second,
-			ExpectContinueTimeout: 1 * time.Second,
-		},
+	transport := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+			DualStack: true,
+		}).DialContext,
+		ForceAttemptHTTP2:     true,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
+
+	if ctx.Bool(networkSkipVerifyFlag) {
+		logrus.Warning("ssl verification is turned off")
+		transport.TLSClientConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
 
 	// Create the context
@@ -71,7 +77,9 @@ func NetworkFromContext(ctx *cli.Context) Network {
 	}
 
 	return Network{
-		Client:  client,
+		Client: &http.Client{
+			Transport: transport,
+		},
 		Context: context,
 	}
 }
