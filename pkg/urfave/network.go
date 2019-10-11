@@ -47,7 +47,6 @@ func networkFlags() []cli.Flag {
 func NetworkFromContext(ctx *cli.Context) Network {
 	// Create the client
 	client := &http.Client{
-		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
