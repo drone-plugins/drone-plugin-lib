@@ -57,6 +57,7 @@ func PipelineFlags() []cli.Flag {
 	flags = append(flags, stageFlags()...)
 	flags = append(flags, stepFlags()...)
 	flags = append(flags, semVerFlags()...)
+	flags = append(flags, loggingFlags()...)
 
 	return flags
 }
