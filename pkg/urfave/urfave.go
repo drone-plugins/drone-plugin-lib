@@ -24,7 +24,7 @@
 //         }
 //         app.Flags = append(
 //             app.Flags,
-//             urfave.PipelineFlags()...,
+//             urfave.Flags()...,
 //         )
 //     }
 //
@@ -44,11 +44,26 @@ import (
 )
 
 //---------------------------------------------------------------------
-// Pipeline
+// Flags
 //---------------------------------------------------------------------
 
-// PipelineFlags has the cli.Flags for the plugin.Pipeline.
-func PipelineFlags() []cli.Flag {
+// Flags for a urfave cli Drone plugin
+func Flags() []cli.Flag {
+	flags := []cli.Flag{}
+
+	flags = append(flags, pipelineFlags()...)
+	flags = append(flags, networkFlags()...)
+	flags = append(flags, loggingFlags()...)
+
+	return flags
+}
+
+//---------------------------------------------------------------------
+// Pipeline flags
+//---------------------------------------------------------------------
+
+// pipelineFlags has the cli.Flags for the plugin.Pipeline.
+func pipelineFlags() []cli.Flag {
 	flags := []cli.Flag{}
 
 	flags = append(flags, buildFlags()...)
@@ -57,7 +72,6 @@ func PipelineFlags() []cli.Flag {
 	flags = append(flags, stageFlags()...)
 	flags = append(flags, stepFlags()...)
 	flags = append(flags, semVerFlags()...)
-	flags = append(flags, loggingFlags()...)
 
 	return flags
 }
