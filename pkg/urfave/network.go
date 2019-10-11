@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
@@ -65,7 +66,7 @@ func NetworkFromContext(ctx *cli.Context) Network {
 	// Create the context
 	context := context.Background()
 
-	if ctx.String(logLevelFlag) == "trace" {
+	if ctx.String(logLevelFlag) == logrus.TraceLevel.String() {
 		context = traceHTTP(context)
 	}
 
