@@ -37,7 +37,7 @@ const networkSkipVerifyFlag = "transport.skip-verify"
 // networkFlags has the cli.Flags for the Transport.
 func networkFlags() []cli.Flag {
 	return []cli.Flag{
-		cli.BoolTFlag{
+		cli.BoolFlag{
 			Name:   networkSkipVerifyFlag,
 			Usage:  "skip ssl verify",
 			EnvVar: "PLUGIN_SKIP_VERIFY",
