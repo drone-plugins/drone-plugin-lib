@@ -15,8 +15,9 @@ const logLevelFlag = "log-level"
 func loggingFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:  logLevelFlag,
-			Usage: "logging-level",
+			Name:   logLevelFlag,
+			Usage:  "logging-level",
+			EnvVar: "PLUGIN_LOG_LEVEL",
 		},
 	}
 }
