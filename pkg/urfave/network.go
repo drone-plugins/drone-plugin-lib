@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 //---------------------------------------------------------------------
@@ -37,10 +37,10 @@ const networkSkipVerifyFlag = "transport.skip-verify"
 // networkFlags has the cli.Flags for the Transport.
 func networkFlags() []cli.Flag {
 	return []cli.Flag{
-		cli.BoolFlag{
-			Name:   networkSkipVerifyFlag,
-			Usage:  "skip ssl verify",
-			EnvVar: "PLUGIN_SKIP_VERIFY",
+		&cli.BoolFlag{
+			Name:    networkSkipVerifyFlag,
+			Usage:   "skip ssl verify",
+			EnvVars: []string{"PLUGIN_SKIP_VERIFY"},
 		},
 	}
 }

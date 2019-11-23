@@ -7,17 +7,17 @@ package urfave
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 const logLevelFlag = "log-level"
 
 func loggingFlags() []cli.Flag {
 	return []cli.Flag{
-		cli.StringFlag{
-			Name:   logLevelFlag,
-			Usage:  "logging-level",
-			EnvVar: "PLUGIN_LOG_LEVEL",
+		&cli.StringFlag{
+			Name:    logLevelFlag,
+			Usage:   "logging-level",
+			EnvVars: []string{"PLUGIN_LOG_LEVEL"},
 		},
 	}
 }
