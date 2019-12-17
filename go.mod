@@ -3,6 +3,6 @@ module github.com/drone-plugins/drone-plugin-lib
 go 1.12
 
 require (
-	github.com/sirupsen/logrus v1.4.2 // indirect
-	github.com/urfave/cli v1.21.0
+	github.com/sirupsen/logrus v1.4.2
+	github.com/urfave/cli/v2 v2.0.0
 )
