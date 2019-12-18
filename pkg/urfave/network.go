@@ -30,6 +30,9 @@ type Network struct {
 
 	// Client for making network requests.
 	Client *http.Client
+
+	/// Whether SSL verification is skipped
+	SkipVerify bool
 }
 
 const networkSkipVerifyFlag = "transport.skip-verify"
@@ -61,7 +64,8 @@ func NetworkFromContext(ctx *cli.Context) Network {
 		ExpectContinueTimeout: 1 * time.Second,
 	}
 
-	if ctx.Bool(networkSkipVerifyFlag) {
+	skipVerify := ctx.Bool(networkSkipVerifyFlag)
+	if skipVerify {
 		logrus.Warning("ssl verification is turned off")
 		transport.TLSClientConfig = &tls.Config{
 			InsecureSkipVerify: true,
@@ -79,6 +83,7 @@ func NetworkFromContext(ctx *cli.Context) Network {
 		Client: &http.Client{
 			Transport: transport,
 		},
-		Context: context,
+		Context:    context,
+		SkipVerify: skipVerify,
 	}
 }
