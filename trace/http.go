@@ -3,7 +3,7 @@
 // Use of this source code is governed by an Apache 2.0 license that can be
 // found in the LICENSE file.
 
-package urfave
+package trace
 
 import (
 	"context"
@@ -14,8 +14,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// traceHTTP uses httptrace to log all network activity for HTTP requests.
-func traceHTTP(ctx context.Context) context.Context {
+// HTTP uses httptrace to log all network activity for HTTP requests.
+func HTTP(ctx context.Context) context.Context {
 	return httptrace.WithClientTrace(ctx, &httptrace.ClientTrace{
 		GetConn: func(hostPort string) {
 			logrus.WithField("host-port", hostPort).Trace("ClientTrace.GetConn")

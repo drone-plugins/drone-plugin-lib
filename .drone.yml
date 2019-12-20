@@ -1,0 +1,57 @@
+---
+kind: pipeline
+type: docker
+name: testing
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: staticcheck
+  pull: always
+  image: golang:1.13
+  commands:
+  - go run honnef.co/go/tools/cmd/staticcheck ./...
+  volumes:
+  - name: gopath
+    path: /go
+
+- name: lint
+  pull: always
+  image: golang:1.13
+  commands:
+  - go run golang.org/x/lint/golint -set_exit_status ./...
+  volumes:
+  - name: gopath
+    path: /go
+
+- name: vet
+  pull: always
+  image: golang:1.13
+  commands:
+  - go vet ./...
+  volumes:
+  - name: gopath
+    path: /go
+
+- name: test
+  pull: always
+  image: golang:1.13
+  commands:
+  - go test -cover -v ./...
+  volumes:
+  - name: gopath
+    path: /go
+
+volumes:
+- name: gopath
+  temp: {}
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+  - refs/pull/**
+
+...
