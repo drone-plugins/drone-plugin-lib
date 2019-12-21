@@ -10,26 +10,24 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-const logLevelFlag = "log-level"
-
+// loggingFlags has the cli.Flags for logging config.
 func loggingFlags() []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
-			Name:    logLevelFlag,
-			Usage:   "logging-level",
+			Name:    "log-level",
+			Usage:   "log level",
 			EnvVars: []string{"PLUGIN_LOG_LEVEL"},
 		},
 	}
 }
 
-// LoggingFromContext sets the logrus logging level.
-func LoggingFromContext(ctx *cli.Context) {
-	lvl, err := logrus.ParseLevel(ctx.String(logLevelFlag))
+// loggingFromContext sets the logrus logging level.
+func loggingFromContext(ctx *cli.Context) {
+	lvl, err := logrus.ParseLevel(ctx.String("log-level"))
 
 	if err != nil {
 		lvl = logrus.InfoLevel
 	}
 
 	logrus.SetLevel(lvl)
-	logrus.WithField("level", lvl.String()).Info("setup logging")
 }
