@@ -27,18 +27,15 @@ func Flags() []cli.Flag {
 	return flags
 }
 
-// FromContext creates a drone.Pipeline from the cli.Context.
-func FromContext(ctx *cli.Context) drone.Pipeline {
-	loggingFromContext(ctx)
-
+// PipelineFromContext creates a drone.Pipeline from the cli.Context.
+func PipelineFromContext(ctx *cli.Context) drone.Pipeline {
 	return drone.Pipeline{
-		Network: networkFromContext(ctx),
-		Build:   buildFromContext(ctx),
-		Repo:    repoFromContext(ctx),
-		Commit:  commitFromContext(ctx),
-		Stage:   stageFromContext(ctx),
-		Step:    stepFromContext(ctx),
-		SemVer:  semVerFromContext(ctx),
-		System:  systemFromContext(ctx),
+		Build:  buildFromContext(ctx),
+		Repo:   repoFromContext(ctx),
+		Commit: commitFromContext(ctx),
+		Stage:  stageFromContext(ctx),
+		Step:   stepFromContext(ctx),
+		SemVer: semVerFromContext(ctx),
+		System: systemFromContext(ctx),
 	}
 }

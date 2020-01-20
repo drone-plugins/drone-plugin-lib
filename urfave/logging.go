@@ -21,8 +21,8 @@ func loggingFlags() []cli.Flag {
 	}
 }
 
-// loggingFromContext sets the logrus logging level.
-func loggingFromContext(ctx *cli.Context) {
+// LoggingFromContext sets the logrus logging level.
+func LoggingFromContext(ctx *cli.Context) {
 	lvl, err := logrus.ParseLevel(ctx.String("log-level"))
 
 	if err != nil {
