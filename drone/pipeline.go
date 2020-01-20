@@ -9,12 +9,11 @@ package drone
 //
 // Represents the full Drone environment that the plugin is executing in.
 type Pipeline struct {
-	Network Network
-	Build   Build
-	Repo    Repo
-	Commit  Commit
-	Stage   Stage
-	Step    Step
-	SemVer  SemVer
-	System  System
+	Build  Build
+	Repo   Repo
+	Commit Commit
+	Stage  Stage
+	Step   Step
+	SemVer SemVer
+	System System
 }

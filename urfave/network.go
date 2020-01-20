@@ -29,8 +29,8 @@ func networkFlags() []cli.Flag {
 	}
 }
 
-// networkFromContext creates a drone.Network from the cli.Context.
-func networkFromContext(c *cli.Context) drone.Network {
+// NetworkFromContext creates a drone.Network from the cli.Context.
+func NetworkFromContext(c *cli.Context) drone.Network {
 	dialer := &net.Dialer{
 		Timeout:   30 * time.Second,
 		KeepAlive: 30 * time.Second,
