@@ -36,7 +36,7 @@ func (e ExitError) Fields() logrus.Fields {
 	return e.fields
 }
 
-// ExitMessage initiales a new ExitCoder implementation.
+// ExitMessage initializes a new ExitCoder implementation.
 func ExitMessage(message interface{}) ExitError {
 	return ExitError{
 		message: message,
@@ -44,7 +44,15 @@ func ExitMessage(message interface{}) ExitError {
 	}
 }
 
-// WithFields initiales a new ExitCoder implementation.
+// ExitMessagef initializes a new ExitCoder implementation.
+func ExitMessagef(format string, a ...interface{}) ExitError {
+	return ExitError{
+		message: fmt.Errorf(format, a...),
+		code: 1,
+	}
+}
+
+// WithFields initializes a new ExitCoder implementation.
 func WithFields(message interface{}, fields logrus.Fields) ExitError {
 	return ExitError{
 		message: message,
