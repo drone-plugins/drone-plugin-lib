@@ -6,6 +6,8 @@
 package urfave
 
 import (
+	"strings"
+
 	"github.com/drone-plugins/drone-plugin-lib/drone"
 	"github.com/urfave/cli/v2"
 )
@@ -95,17 +97,24 @@ func commitFlags() []cli.Flag {
 
 // commitFromContext creates a drone.Commit from the cli.Context.
 func commitFromContext(ctx *cli.Context) drone.Commit {
+	splitMsg := strings.Split(ctx.String("commit.message"), "\n")
+
 	return drone.Commit{
-		SHA:          ctx.String("commit.sha"),
-		Before:       ctx.String("commit.before"),
-		After:        ctx.String("commit.after"),
-		Ref:          ctx.String("commit.ref"),
-		Branch:       ctx.String("commit.branch"),
-		Link:         ctx.String("commit.link"),
-		Message:      ctx.String("commit.message"),
-		Author:       ctx.String("commit.author"),
-		AuthorName:   ctx.String("commit.author-name"),
-		AuthorEmail:  ctx.String("commit.author-email"),
-		AuthorAvatar: ctx.String("commit.author-avatar"),
+		SHA:    ctx.String("commit.sha"),
+		Before: ctx.String("commit.before"),
+		After:  ctx.String("commit.after"),
+		Ref:    ctx.String("commit.ref"),
+		Branch: ctx.String("commit.branch"),
+		Link:   ctx.String("commit.link"),
+		Message: drone.Message{
+			Title: strings.TrimSpace(splitMsg[0]),
+			Body:  strings.TrimSpace(strings.Join(splitMsg[1:], "\n")),
+		},
+		Author: drone.Author{
+			Username: ctx.String("commit.author"),
+			Name:     ctx.String("commit.author-name"),
+			Email:    ctx.String("commit.author-email"),
+			Avatar:   ctx.String("commit.author-avatar"),
+		},
 	}
 }
