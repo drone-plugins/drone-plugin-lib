@@ -20,6 +20,7 @@ func Flags() []cli.Flag {
 	flags = append(flags, stageFlags()...)
 	flags = append(flags, stepFlags()...)
 	flags = append(flags, semVerFlags()...)
+	flags = append(flags, calVerFlags()...)
 	flags = append(flags, systemFlags()...)
 	flags = append(flags, networkFlags()...)
 	flags = append(flags, loggingFlags()...)
@@ -36,6 +37,7 @@ func PipelineFromContext(ctx *cli.Context) drone.Pipeline {
 		Stage:  stageFromContext(ctx),
 		Step:   stepFromContext(ctx),
 		SemVer: semVerFromContext(ctx),
+		CalVer: calVerFromContext(ctx),
 		System: systemFromContext(ctx),
 	}
 }
