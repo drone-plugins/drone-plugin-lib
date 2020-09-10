@@ -32,15 +32,6 @@ type (
 
 		// Author of the commit.
 		Author Author
-
-		// AuthorName of the commit.
-		AuthorName string
-
-		// AuthorEmail of the commit.
-		AuthorEmail string
-
-		// AuthorAvatar of the commit.
-		AuthorAvatar string
 	}
 
 	// Author of a Commit.
