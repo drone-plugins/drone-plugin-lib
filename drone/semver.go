@@ -37,3 +37,7 @@ type SemVer struct {
 	// Error is the semantic version parsing error if the tag was invalid.
 	Error string
 }
+
+func (s SemVer) String() string {
+	return s.Version
+}

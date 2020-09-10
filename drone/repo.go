@@ -37,3 +37,7 @@ type Repo struct {
 	// Private to show if the repo is private.
 	Private bool
 }
+
+func (r Repo) String() string {
+	return r.Slug
+}
