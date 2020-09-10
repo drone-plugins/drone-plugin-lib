@@ -72,7 +72,7 @@ func semVerFlags() []cli.Flag {
 	}
 }
 
-// semVerFromContext creates a drone.Step from the cli.Context.
+// semVerFromContext creates a drone.SemVer from the cli.Context.
 func semVerFromContext(ctx *cli.Context) drone.SemVer {
 	return drone.SemVer{
 		Version:    ctx.String("semver.version"),
