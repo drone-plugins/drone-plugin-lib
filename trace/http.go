@@ -89,7 +89,6 @@ func HTTP(ctx context.Context) context.Context {
 				"did-resume":                    cs.DidResume,
 				"cipher-suite":                  cs.CipherSuite,
 				"negotiated-protocol":           cs.NegotiatedProtocol,
-				"negotiated-protocol-is-mutual": cs.NegotiatedProtocolIsMutual,
 				"server-name":                   cs.ServerName,
 				"error":                         err,
 			}).Trace("ClientTrace.TLSHandshakeDone")
