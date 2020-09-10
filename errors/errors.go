@@ -48,7 +48,7 @@ func ExitMessage(message interface{}) ExitError {
 func ExitMessagef(format string, a ...interface{}) ExitError {
 	return ExitError{
 		message: fmt.Errorf(format, a...),
-		code: 1,
+		code:    1,
 	}
 }
 

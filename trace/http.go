@@ -84,13 +84,13 @@ func HTTP(ctx context.Context) context.Context {
 
 		TLSHandshakeDone: func(cs tls.ConnectionState, err error) {
 			logrus.WithFields(logrus.Fields{
-				"version":                       cs.Version,
-				"handshake-complete":            cs.HandshakeComplete,
-				"did-resume":                    cs.DidResume,
-				"cipher-suite":                  cs.CipherSuite,
-				"negotiated-protocol":           cs.NegotiatedProtocol,
-				"server-name":                   cs.ServerName,
-				"error":                         err,
+				"version":             cs.Version,
+				"handshake-complete":  cs.HandshakeComplete,
+				"did-resume":          cs.DidResume,
+				"cipher-suite":        cs.CipherSuite,
+				"negotiated-protocol": cs.NegotiatedProtocol,
+				"server-name":         cs.ServerName,
+				"error":               err,
 			}).Trace("ClientTrace.TLSHandshakeDone")
 		},
 
