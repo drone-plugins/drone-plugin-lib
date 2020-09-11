@@ -66,6 +66,11 @@ func buildFlags() []cli.Flag {
 			EnvVars: []string{"DRONE_BUILD_STATUS"},
 		},
 		&cli.StringFlag{
+			Name:    "build.link",
+			Usage:   "build link",
+			EnvVars: []string{"DRONE_BUILD_LINK"},
+		},
+		&cli.StringFlag{
 			Name:    "build.created",
 			Usage:   "build created",
 			EnvVars: []string{"DRONE_BUILD_CREATED"},
@@ -84,6 +89,11 @@ func buildFlags() []cli.Flag {
 			Name:    "build.deploy-to",
 			Usage:   "build deploy to",
 			EnvVars: []string{"DRONE_DEPLOY_TO"},
+		},
+		&cli.IntFlag{
+			Name:    "build.deploy-id",
+			Usage:   "build deploy id",
+			EnvVars: []string{"DRONE_DEPLOY_ID"},
 		},
 		&cli.StringSliceFlag{
 			Name:    "build.failed-stages",
@@ -111,10 +121,12 @@ func buildFromContext(ctx *cli.Context) drone.Build {
 		Event:        ctx.String("build.event"),
 		Action:       ctx.String("build.action"),
 		Status:       ctx.String("build.status"),
+		Link:         ctx.String("build.link"),
 		Created:      time.Unix(ctx.Int64("build.created"), 0),
 		Started:      time.Unix(ctx.Int64("build.started"), 0),
 		Finished:     time.Unix(ctx.Int64("build.finished"), 0),
 		DeployTo:     ctx.String("build.deploy-to"),
+		DeployID:     ctx.Int("build.deploy-id"),
 		FailedStages: ctx.StringSlice("build.failed-stages"),
 		FailedSteps:  ctx.StringSlice("build.failed-steps"),
 	}

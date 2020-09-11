@@ -42,6 +42,9 @@ type Build struct {
 	// Status of the build.
 	Status string
 
+	// Link to the build.
+	Link string
+
 	// Created time of the build.
 	Created time.Time
 
@@ -53,6 +56,9 @@ type Build struct {
 
 	// DeployTo the environment.
 	DeployTo string
+
+	// DeployID for the environment.
+	DeployID int
 
 	// FailedStages of the build.
 	FailedStages []string
