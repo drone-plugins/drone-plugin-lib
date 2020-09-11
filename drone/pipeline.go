@@ -15,5 +15,6 @@ type Pipeline struct {
 	Stage  Stage
 	Step   Step
 	SemVer SemVer
+	CalVer CalVer
 	System System
 }
