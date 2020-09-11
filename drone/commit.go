@@ -55,6 +55,10 @@ type (
 	}
 )
 
+func (c Commit) String() string {
+	return c.SHA
+}
+
 func (a Author) String() string {
 	return a.Username
 }

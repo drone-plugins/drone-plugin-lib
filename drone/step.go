@@ -13,3 +13,7 @@ type Step struct {
 	// Number is the numeric value of the step.
 	Number int
 }
+
+func (s Step) String() string {
+	return s.Name
+}

@@ -5,9 +5,7 @@
 
 package drone
 
-import (
-	"time"
-)
+import "time"
 
 // Stage represents a build stage.
 type Stage struct {
@@ -61,4 +59,8 @@ type Stage struct {
 
 	// DependsOn is a list of dependencies for the current build stage.
 	DependsOn []string
+}
+
+func (s Stage) String() string {
+	return s.Name
 }

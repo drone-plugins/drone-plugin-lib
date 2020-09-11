@@ -16,3 +16,7 @@ type System struct {
 	// Version for the system version.
 	Version string
 }
+
+func (s System) String() string {
+	return s.Host
+}
