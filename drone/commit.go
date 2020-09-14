@@ -5,6 +5,8 @@
 
 package drone
 
+import "strings"
+
 type (
 	// Commit represents the current commit being built.
 	Commit struct {
@@ -64,5 +66,19 @@ func (a Author) String() string {
 }
 
 func (m Message) String() string {
-	return m.Title + m.Body
+	if m.Body == "" {
+		return m.Title
+	}
+
+	return m.Title + "\n\n" + m.Body
+}
+
+// ParseMessage takes a full commit message and translates it into a Message.
+func ParseMessage(msg string) Message {
+	splitMsg := strings.Split(msg, "\n")
+
+	return Message{
+		Title: strings.TrimSpace(splitMsg[0]),
+		Body:  strings.TrimSpace(strings.Join(splitMsg[1:], "\n")),
+	}
 }
