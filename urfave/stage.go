@@ -6,8 +6,6 @@
 package urfave
 
 import (
-	"time"
-
 	"github.com/drone-plugins/drone-plugin-lib/drone"
 	"github.com/urfave/cli/v2"
 )
@@ -122,8 +120,8 @@ func stageFromContext(ctx *cli.Context) drone.Stage {
 		Variant:   ctx.String("stage.variant"),
 		Version:   ctx.String("stage.version"),
 		Status:    ctx.String("stage.status"),
-		Started:   time.Unix(ctx.Int64("stage.started"), 0),
-		Finished:  time.Unix(ctx.Int64("stage.finished"), 0),
+		Started:   ctx.Int64("stage.started"),
+		Finished:  ctx.Int64("stage.finished"),
 		DependsOn: ctx.StringSlice("stage.depends-on"),
 	}
 }

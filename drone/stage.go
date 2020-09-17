@@ -5,8 +5,6 @@
 
 package drone
 
-import "time"
-
 // Stage represents a build stage.
 type Stage struct {
 	// Kind is the kind of resource being executed.
@@ -49,13 +47,13 @@ type Stage struct {
 
 	// Started is the unix timestamp for when a build stage was started by
 	// the runner.
-	Started time.Time
+	Started int64
 
 	// Finished is the unix timestamp for when the pipeline is finished.
 	//
 	// A running pipleine cannot have a finish timestamp, therefore, the
 	// system aways sets this value to the current timestamp.
-	Finished time.Time
+	Finished int64
 
 	// DependsOn is a list of dependencies for the current build stage.
 	DependsOn []string

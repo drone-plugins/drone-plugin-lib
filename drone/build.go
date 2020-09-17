@@ -5,10 +5,6 @@
 
 package drone
 
-import (
-	"time"
-)
-
 // Build represents a build of a repository.
 type Build struct {
 	// Branch defines the branch name of the build.
@@ -46,13 +42,13 @@ type Build struct {
 	Link string
 
 	// Created time of the build.
-	Created time.Time
+	Created int64
 
 	// Started time of the build.
-	Started time.Time
+	Started int64
 
 	// Finished time of the build.
-	Finished time.Time
+	Finished int64
 
 	// DeployTo the environment.
 	DeployTo string

@@ -6,8 +6,6 @@
 package urfave
 
 import (
-	"time"
-
 	"github.com/drone-plugins/drone-plugin-lib/drone"
 	"github.com/urfave/cli/v2"
 )
@@ -122,9 +120,9 @@ func buildFromContext(ctx *cli.Context) drone.Build {
 		Action:       ctx.String("build.action"),
 		Status:       ctx.String("build.status"),
 		Link:         ctx.String("build.link"),
-		Created:      time.Unix(ctx.Int64("build.created"), 0),
-		Started:      time.Unix(ctx.Int64("build.started"), 0),
-		Finished:     time.Unix(ctx.Int64("build.finished"), 0),
+		Created:      ctx.Int64("build.created"),
+		Started:      ctx.Int64("build.started"),
+		Finished:     ctx.Int64("build.finished"),
 		DeployTo:     ctx.String("build.deploy-to"),
 		DeployID:     ctx.Int("build.deploy-id"),
 		FailedStages: ctx.StringSlice("build.failed-stages"),
