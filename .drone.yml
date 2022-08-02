@@ -10,8 +10,9 @@ platform:
 steps:
 - name: staticcheck
   pull: always
-  image: golang:1.15
+  image: golang:1.18
   commands:
+  - go get honnef.co/go/tools/cmd/staticcheck
   - go run honnef.co/go/tools/cmd/staticcheck ./...
   volumes:
   - name: gopath
@@ -19,8 +20,9 @@ steps:
 
 - name: lint
   pull: always
-  image: golang:1.15
+  image: golang:1.18
   commands:
+  - go get golang.org/x/lint/golint
   - go run golang.org/x/lint/golint -set_exit_status ./...
   volumes:
   - name: gopath
@@ -28,7 +30,7 @@ steps:
 
 - name: vet
   pull: always
-  image: golang:1.15
+  image: golang:1.18
   commands:
   - go vet ./...
   volumes:
@@ -37,7 +39,7 @@ steps:
 
 - name: test
   pull: always
-  image: golang:1.15
+  image: golang:1.18
   commands:
   - go test -cover -v ./...
   volumes:
