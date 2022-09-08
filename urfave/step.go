@@ -25,6 +25,7 @@ func stepFlags() []cli.Flag {
 			Usage: "step number",
 			EnvVars: []string{
 				"DRONE_STEP_NUMBER",
+				"CI_JOB_NUMBER",
 			},
 		},
 	}

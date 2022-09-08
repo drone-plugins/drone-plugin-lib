@@ -26,6 +26,7 @@ func systemFlags() []cli.Flag {
 			EnvVars: []string{
 				"DRONE_SYSTEM_HOST",
 				"DRONE_SYSTEM_HOSTNAME",
+				"CI_SYSTEM_HOST",
 			},
 		},
 		&cli.StringFlag{

@@ -16,44 +16,68 @@ import (
 func buildFlags() []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
-			Name:    "build.branch",
-			Usage:   "build branch",
-			EnvVars: []string{"DRONE_BRANCH"},
+			Name:  "build.branch",
+			Usage: "build branch",
+			EnvVars: []string{
+				"DRONE_BRANCH",
+				"CI_COMMIT_BRANCH",
+			},
 		},
 		&cli.IntFlag{
-			Name:    "build.pull-request",
-			Usage:   "build pull request",
-			EnvVars: []string{"DRONE_PULL_REQUEST"},
+			Name:  "build.pull-request",
+			Usage: "build pull request",
+			EnvVars: []string{
+				"DRONE_PULL_REQUEST",
+				"CI_COMMIT_PULL_REQUEST",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.tag",
-			Usage:   "build tag",
-			EnvVars: []string{"DRONE_TAG"},
+			Name:  "build.tag",
+			Usage: "build tag",
+			EnvVars: []string{
+				"DRONE_TAG",
+				"CI_COMMIT_TAG",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.source-branch",
-			Usage:   "build source branch",
-			EnvVars: []string{"DRONE_SOURCE_BRANCH"},
+			Name:  "build.source-branch",
+			Usage: "build source branch",
+			EnvVars: []string{
+				"DRONE_SOURCE_BRANCH",
+				"CI_COMMIT_SOURCE_BRANCH",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.target-branch",
-			Usage:   "build target branch",
-			EnvVars: []string{"DRONE_TARGET_BRANCH"},
+			Name:  "build.target-branch",
+			Usage: "build target branch",
+			EnvVars: []string{
+				"DRONE_TARGET_BRANCH",
+				"CI_COMMIT_TARGET_BRANCH",
+			},
 		},
 		&cli.IntFlag{
-			Name:    "build.number",
-			Usage:   "build number",
-			EnvVars: []string{"DRONE_BUILD_NUMBER"},
+			Name:  "build.number",
+			Usage: "build number",
+			EnvVars: []string{
+				"DRONE_BUILD_NUMBER",
+				"CI_BUILD_NUMBER",
+			},
 		},
 		&cli.IntFlag{
-			Name:    "build.parent",
-			Usage:   "build parent",
-			EnvVars: []string{"DRONE_BUILD_PARENT"},
+			Name:  "build.parent",
+			Usage: "build parent",
+			EnvVars: []string{
+				"DRONE_BUILD_PARENT",
+				"CI_BUILD_PARENT",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.event",
-			Usage:   "build event",
-			EnvVars: []string{"DRONE_BUILD_EVENT"},
+			Name:  "build.event",
+			Usage: "build event",
+			EnvVars: []string{
+				"DRONE_BUILD_EVENT",
+				"CI_BUILD_EVENT",
+			},
 		},
 		&cli.StringFlag{
 			Name:    "build.action",
@@ -61,29 +85,44 @@ func buildFlags() []cli.Flag {
 			EnvVars: []string{"DRONE_BUILD_ACTION"},
 		},
 		&cli.StringFlag{
-			Name:    "build.status",
-			Usage:   "build status",
-			EnvVars: []string{"DRONE_BUILD_STATUS"},
+			Name:  "build.status",
+			Usage: "build status",
+			EnvVars: []string{
+				"DRONE_BUILD_STATUS",
+				"CI_BUILD_STATUS",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.link",
-			Usage:   "build link",
-			EnvVars: []string{"DRONE_BUILD_LINK"},
+			Name:  "build.link",
+			Usage: "build link",
+			EnvVars: []string{
+				"DRONE_BUILD_LINK",
+				"CI_BUILD_LINK",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.created",
-			Usage:   "build created",
-			EnvVars: []string{"DRONE_BUILD_CREATED"},
+			Name:  "build.created",
+			Usage: "build created",
+			EnvVars: []string{
+				"DRONE_BUILD_CREATED",
+				"CI_BUILD_CREATED",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.started",
-			Usage:   "build started",
-			EnvVars: []string{"DRONE_BUILD_STARTED"},
+			Name:  "build.started",
+			Usage: "build started",
+			EnvVars: []string{
+				"DRONE_BUILD_STARTED",
+				"CI_BUILD_STARTED",
+			},
 		},
 		&cli.StringFlag{
-			Name:    "build.finished",
-			Usage:   "build finished",
-			EnvVars: []string{"DRONE_BUILD_FINISHED"},
+			Name:  "build.finished",
+			Usage: "build finished",
+			EnvVars: []string{
+				"DRONE_BUILD_FINISHED",
+				"CI_BUILD_FINISHED",
+			},
 		},
 		&cli.StringFlag{
 			Name:    "build.deploy-to",

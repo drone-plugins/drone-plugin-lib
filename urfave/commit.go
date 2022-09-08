@@ -19,6 +19,7 @@ func commitFlags() []cli.Flag {
 			EnvVars: []string{
 				"DRONE_COMMIT",
 				"DRONE_COMMIT_SHA",
+				"CI_COMMIT_SHA",
 			},
 		},
 		&cli.StringFlag{
@@ -26,6 +27,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit before",
 			EnvVars: []string{
 				"DRONE_COMMIT_BEFORE",
+				"CI_PREV_COMMIT_SHA",
 			},
 		},
 		&cli.StringFlag{
@@ -40,6 +42,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit ref",
 			EnvVars: []string{
 				"DRONE_COMMIT_REF",
+				"CI_COMMIT_REF",
 			},
 		},
 		&cli.StringFlag{
@@ -47,12 +50,14 @@ func commitFlags() []cli.Flag {
 			Usage: "commit branch",
 			EnvVars: []string{
 				"DRONE_COMMIT_BRANCH",
+				"CI_COMMIT_BRANCH",
 			},
 		}, &cli.StringFlag{
 			Name:  "commit.link",
 			Usage: "commit link",
 			EnvVars: []string{
 				"DRONE_COMMIT_LINK",
+				"CI_COMMIT_LINK",
 			},
 		},
 		&cli.StringFlag{
@@ -60,6 +65,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit message",
 			EnvVars: []string{
 				"DRONE_COMMIT_MESSAGE",
+				"CI_COMMIT_MESSAGE",
 			},
 		},
 		&cli.StringFlag{
@@ -67,6 +73,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit author",
 			EnvVars: []string{
 				"DRONE_COMMIT_AUTHOR",
+				"CI_COMMIT_AUTHOR",
 			},
 		},
 		&cli.StringFlag{
@@ -74,6 +81,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit author name",
 			EnvVars: []string{
 				"DRONE_COMMIT_AUTHOR_NAME",
+				"CI_COMMIT_AUTHOR",
 			},
 		},
 		&cli.StringFlag{
@@ -81,6 +89,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit author email",
 			EnvVars: []string{
 				"DRONE_COMMIT_AUTHOR_EMAIL",
+				"CI_COMMIT_AUTHOR_EMAIL",
 			},
 		},
 		&cli.StringFlag{
@@ -88,6 +97,7 @@ func commitFlags() []cli.Flag {
 			Usage: "commit author avatar",
 			EnvVars: []string{
 				"DRONE_COMMIT_AUTHOR_AVATAR",
+				"CI_COMMIT_AUTHOR_AVATAR",
 			},
 		},
 	}

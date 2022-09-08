@@ -18,6 +18,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo slug",
 			EnvVars: []string{
 				"DRONE_REPO",
+				"CI_REPO",
 			},
 		},
 		&cli.StringFlag{
@@ -25,6 +26,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo scm",
 			EnvVars: []string{
 				"DRONE_REPO_SCM",
+				"CI_REPO_SCM",
 			},
 		},
 		&cli.StringFlag{
@@ -33,6 +35,7 @@ func repoFlags() []cli.Flag {
 			EnvVars: []string{
 				"DRONE_REPO_OWNER",
 				"DRONE_REPO_NAMESPACE",
+				"CI_REPO_OWNER",
 			},
 		},
 		&cli.StringFlag{
@@ -40,6 +43,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo name",
 			EnvVars: []string{
 				"DRONE_REPO_NAME",
+				"CI_REPO_NAME",
 			},
 		},
 		&cli.StringFlag{
@@ -47,6 +51,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo link",
 			EnvVars: []string{
 				"DRONE_REPO_LINK",
+				"CI_REPO_LINK",
 			},
 		},
 		&cli.StringFlag{
@@ -54,6 +59,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo branch",
 			EnvVars: []string{
 				"DRONE_REPO_BRANCH",
+				"CI_REPO_DEFAULT_BRANCH",
 			},
 		},
 		&cli.StringFlag{
@@ -62,6 +68,7 @@ func repoFlags() []cli.Flag {
 			EnvVars: []string{
 				"DRONE_REMOTE_URL",
 				"DRONE_GIT_HTTP_URL",
+				"CI_REPO_REMOTE",
 			},
 		},
 		&cli.StringFlag{
@@ -83,6 +90,7 @@ func repoFlags() []cli.Flag {
 			Usage: "repo private",
 			EnvVars: []string{
 				"DRONE_REPO_PRIVATE",
+				"CI_REPO_PRIVATE",
 			},
 		},
 	}
