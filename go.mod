@@ -1,10 +1,10 @@
 module github.com/drone-plugins/drone-plugin-lib
 
-go 1.18
+go 1.19
 
 require (
 	github.com/sirupsen/logrus v1.9.0
-	github.com/urfave/cli/v2 v2.11.1
+	github.com/urfave/cli/v2 v2.23.5
 )
 
 require (
