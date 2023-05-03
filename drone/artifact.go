@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 )
 
-// Type of registry
+// RegistryType is the type of registry
 type RegistryType string
 
 // Registries const
@@ -29,15 +29,15 @@ const (
 )
 
 type (
-	//  Image stores the image data
+	// Image stores the image data
 	Image struct {
 		Image  string `json:"image"`
 		Digest string `json:"digest"`
 	}
-	// Date stores the registry data
+	// Data stores the registry data
 	Data struct {
 		RegistryType RegistryType `json:"registryType"`
-		RegistryUrl  string       `json:"registryUrl"`
+		RegistryURL  string       `json:"registryUrl"`
 		Images       []Image      `json:"images"`
 	}
 	// DockerArtifact is the current artifact
@@ -58,7 +58,7 @@ func WritePluginArtifactFile(registryType RegistryType, artifactFilePath, regist
 	}
 	data := Data{
 		RegistryType: registryType,
-		RegistryUrl:  registryURL,
+		RegistryURL:  registryURL,
 		Images:       images,
 	}
 
