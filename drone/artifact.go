@@ -22,6 +22,7 @@ const (
 	ECR    RegistryType = "ECR"
 	GCR    RegistryType = "GCR"
 	ACR    RegistryType = "ACR"
+	GAR    RegistryType = "GAR"
 )
 
 const (
