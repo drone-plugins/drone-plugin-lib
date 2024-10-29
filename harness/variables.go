@@ -13,7 +13,7 @@ const (
 
 // SetSecret sets a new secret by adding it to the output
 func SetSecret(name, value string) error {
-	return WriteEnvToFile(name, value)
+	return WriteEnvToOutputFile(name, value)
 }
 
 // UpdateSecret updates an existing secret with a new value
