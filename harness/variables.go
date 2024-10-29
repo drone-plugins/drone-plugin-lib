@@ -18,7 +18,7 @@ func SetSecret(name, value string) error {
 
 // UpdateSecret updates an existing secret with a new value
 func UpdateSecret(name, value string) error {
-	return WriteEnvToFile(name, value)
+	return WriteEnvToOutputFile(name, value)
 }
 
 // DeleteSecret removes a secret from the output
