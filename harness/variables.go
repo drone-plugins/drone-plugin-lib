@@ -23,7 +23,7 @@ func UpdateSecret(name, value string) error {
 
 // DeleteSecret removes a secret from the output
 func DeleteSecret(name string) error {
-	return WriteEnvToFile(name, "")
+	return WriteEnvToOutputFile(name, "")
 }
 
 // SetError sets the error message and writes it to the DRONE_OUTPUT file
