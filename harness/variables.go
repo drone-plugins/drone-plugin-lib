@@ -32,7 +32,7 @@ func SetError(message string) error {
 }
 
 // WriteEnvToFile writes a key-value pair to the DRONE_OUTPUT file
-func WriteEnvToFile(key, value string) error {
+func WriteEnvToOutputFile(key, value string) error {
 	outputFilePath := os.Getenv("DRONE_OUTPUT")
 	
 	// Check the extension of the output file (.env or .out)
