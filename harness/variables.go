@@ -26,7 +26,7 @@ func UpdateSecret(name, value string) error {
 
 // DeleteSecret removes a secret by setting it to an empty value in the DRONE_OUTPUT file
 func DeleteSecret(name string) error {
-	return WriteEnvToFile(DroneOutputFileEnv, name, "")
+	return WriteEnvToOutputFile(DroneOutputFileEnv, name, "")
 }
 
 // SetError sets the error message and error code, writing them to the CI_ERROR_METADATA file
