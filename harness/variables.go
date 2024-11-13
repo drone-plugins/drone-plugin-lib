@@ -38,7 +38,7 @@ func SetError(message, code string) error {
 }
 
 // WriteEnvToFile writes a key-value pair to the specified file, determined by an environment variable
-func WriteEnvToFile(envVar, key, value string) error {
+func WriteEnvToOutputFile(envVar, key, value string) error {
 	// Get the file path from the specified environment variable
 	filePath := os.Getenv(envVar)
 	if filePath == "" {
