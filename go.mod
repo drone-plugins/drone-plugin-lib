@@ -1,4 +1,4 @@
-module github.com/DevanshMathur19/drone-plugin-lib
+module github.com/drone-plugins/drone-plugin-lib
 
 go 1.19
 
