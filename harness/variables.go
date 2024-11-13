@@ -16,7 +16,7 @@ const (
 
 // SetSecret sets a new secret by adding it to the DRONE_OUTPUT file
 func SetSecret(name, value string) error {
-	return WriteEnvToFile(DroneOutputFileEnv, name, value)
+	return WriteEnvToOutputFile(DroneOutputFileEnv, name, value)
 }
 
 // UpdateSecret updates an existing secret with a new value in the DRONE_OUTPUT file
