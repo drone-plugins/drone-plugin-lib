@@ -31,7 +31,7 @@ func DeleteSecret(name string) error {
 
 // SetError sets the error message and error code, writing them to the CI_ERROR_METADATA file
 func SetError(message, code string) error {
-	if err := WriteEnvToFile(CIMetadataFileEnv, CIErrorMessageKey, message); err != nil {
+	if err := WriteEnvToOutputFile(CIMetadataFileEnv, CIErrorMessageKey, message); err != nil {
 		return err
 	}
 	return WriteEnvToFile(CIMetadataFileEnv, CIErrorCodeKey, code)
