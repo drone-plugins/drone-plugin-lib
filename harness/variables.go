@@ -34,7 +34,7 @@ func SetError(message, code string) error {
 	if err := WriteEnvToOutputFile(CIMetadataFileEnv, CIErrorMessageKey, message); err != nil {
 		return err
 	}
-	return WriteEnvToFile(CIMetadataFileEnv, CIErrorCodeKey, code)
+	return WriteEnvToOutputFile(CIMetadataFileEnv, CIErrorCodeKey, code)
 }
 
 // WriteEnvToFile writes a key-value pair to the specified file, determined by an environment variable
