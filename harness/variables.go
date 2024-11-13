@@ -21,7 +21,7 @@ func SetSecret(name, value string) error {
 
 // UpdateSecret updates an existing secret with a new value in the DRONE_OUTPUT file
 func UpdateSecret(name, value string) error {
-	return WriteEnvToFile(DroneOutputFileEnv, name, value)
+	return WriteEnvToOutputFile(DroneOutputFileEnv, name, value)
 }
 
 // DeleteSecret removes a secret by setting it to an empty value in the DRONE_OUTPUT file
