@@ -8,36 +8,59 @@ import (
 )
 
 const (
-	CIErrorMessageKey  = "CI_ERROR_MESSAGE"
-	CIErrorCodeKey     = "CI_ERROR_CODE"
-	CIMetadataFileEnv  = "CI_ERROR_METADATA"
-	DroneOutputFileEnv = "DRONE_OUTPUT"
+	// ErrorMessageKey is the key used to retrieve or store the error message content.
+	ErrorMessageKey = "ERROR_MESSAGE"
+
+	// ErrorCodeKey is the key used to identify the specific error code associated with an error.
+	ErrorCodeKey = "ERROR_CODE"
+
+	// ErrorCategoryKey is the key used to classify the category of the error, which can help in grouping similar types of errors.
+	ErrorCategoryKey = "ERROR_CATEGORY"
+
+	// MetadataFile is the key for the file that stores metadata associated with an error, such as details about the error's source or context.
+	MetadataFile = "ERROR_METADATA_FILE"
+
+	// DroneOutputFile is the key for the file where output related to the Drone CI process is stored.
+	DroneOutputFile = "DRONE_OUTPUT"
 )
 
 // SetSecret sets a new secret by adding it to the DRONE_OUTPUT file
 func SetSecret(name, value string) error {
-	return WriteEnvToOutputFile(DroneOutputFileEnv, name, value)
+	return WriteEnvToOutputFile(DroneOutputFile, name, value)
 }
 
 // UpdateSecret updates an existing secret with a new value in the DRONE_OUTPUT file
 func UpdateSecret(name, value string) error {
-	return WriteEnvToOutputFile(DroneOutputFileEnv, name, value)
+	return WriteEnvToOutputFile(DroneOutputFile, name, value)
 }
 
 // DeleteSecret removes a secret by setting it to an empty value in the DRONE_OUTPUT file
 func DeleteSecret(name string) error {
-	return WriteEnvToOutputFile(DroneOutputFileEnv, name, "")
+	return WriteEnvToOutputFile(DroneOutputFile, name, "")
 }
 
 // SetError sets the error message and error code, writing them to the CI_ERROR_METADATA file
-func SetError(message, code string) error {
-	if err := WriteEnvToOutputFile(CIMetadataFileEnv, CIErrorMessageKey, message); err != nil {
+// SetError sets the error message, error code, and error category, writing them to the CI_ERROR_METADATA file
+func SetError(message, code, category string) error {
+	// Write the error message
+	if err := WriteEnvToOutputFile(MetadataFile, ErrorMessageKey, message); err != nil {
 		return err
 	}
-	return WriteEnvToOutputFile(CIMetadataFileEnv, CIErrorCodeKey, code)
+
+	// Write the error code
+	if err := WriteEnvToOutputFile(MetadataFile, ErrorCodeKey, code); err != nil {
+		return err
+	}
+
+	// Write the error category
+	if err := WriteEnvToOutputFile(MetadataFile, ErrorCategoryKey, category); err != nil {
+		return err
+	}
+
+	return nil
 }
 
-// WriteEnvToFile writes a key-value pair to the specified file, determined by an environment variable
+// WriteEnvToOutputFile writes a key-value pair to the specified file, determined by an environment variable
 func WriteEnvToOutputFile(envVar, key, value string) error {
 	// Get the file path from the specified environment variable
 	filePath := os.Getenv(envVar)
