@@ -20,7 +20,7 @@ const (
 	// MetadataFile is the key for the file that stores metadata associated with an error, such as details about the error's source or context.
 	MetadataFile = "ERROR_METADATA_FILE"
 
-	// DroneOutputFile is the key for the file where output related to the Drone CI process is stored.
+	// DroneOutputFile is the key for the file where output can exported and utilized in the subsequent steps in Harness CI pipeline.
 	DroneOutputFile = "DRONE_OUTPUT"
 )
 
