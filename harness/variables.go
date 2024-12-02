@@ -30,7 +30,7 @@ const (
 
 // SetSecret sets a new secret by adding it to the HARNESS_OUTPUT_SECRET_FILE file
 func SetSecret(name, value string) error {
-	return WriteEnvToOutputFile(HarnessOutputSecretFile, name, value)
+	return UpdateOrRemoveKeyValue(HarnessOutputSecretFile, name, value, false)
 }
 
 // UpdateSecret overwrites the value of an existing secret.
@@ -45,7 +45,7 @@ func DeleteSecret(name string) error {
 
 // SetOutput sets a new secret by adding it to the DRONE_OUTPUT file
 func SetOutput(name, value string) error {
-	return WriteEnvToOutputFile(DroneOutputFile, name, value)
+	return UpdateOrRemoveKeyValue(DroneOutputFile, name, value, false)
 }
 
 // UpdateOutput overwrites the value of an existing output.
@@ -61,64 +61,22 @@ func DeleteOutput(name string) error {
 // SetErrorMetadata sets the error message, error code, and error category, writing them to the CI_ERROR_METADATA file
 func SetErrorMetadata(message, code, category string) error {
 	// Write the error message
-	if err := WriteEnvToOutputFile(MetadataFile, ErrorMessageKey, message); err != nil {
+	if err := UpdateOrRemoveKeyValue(MetadataFile, ErrorMessageKey, message, false); err != nil {
 		return err
 	}
 
 	// Write the error code
-	if err := WriteEnvToOutputFile(MetadataFile, ErrorCodeKey, code); err != nil {
+	if err := UpdateOrRemoveKeyValue(MetadataFile, ErrorCodeKey, code, false); err != nil {
 		return err
 	}
 
 	// Write the error category
-	if err := WriteEnvToOutputFile(MetadataFile, ErrorCategoryKey, category); err != nil {
+	if err := UpdateOrRemoveKeyValue(MetadataFile, ErrorCategoryKey, category, false); err != nil {
 		return err
 	}
 
 	return nil
 }
-
-// WriteEnvToOutputFile writes a key-value pair to the specified file, determined by an environment variable
-func WriteEnvToOutputFile(envVar, key, value string) error {
-	// Get the file path from the specified environment variable
-	filePath := os.Getenv(envVar)
-	if filePath == "" {
-		return fmt.Errorf("environment variable %s is not set", envVar)
-	}
-
-	// Check the extension of the file (.env or .out)
-	ext := strings.ToLower(filepath.Ext(filePath))
-
-	var content string
-	if ext == ".env" {
-		// Write in .env format (KEY=VALUE)
-		content = fmt.Sprintf("%s=%s\n", key, value)
-	} else if ext == ".out" {
-		// Write in .out format (KEY VALUE)
-		content = fmt.Sprintf("%s %s\n", key, value)
-	} else {
-		return fmt.Errorf("unsupported file extension: %s", ext)
-	}
-
-	return WriteToFile(filePath, content)
-}
-
-// Helper function to append content to the file
-func WriteToFile(filename, content string) error {
-	f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		return fmt.Errorf("failed to open file: %w", err)
-	}
-	defer f.Close()
-
-	_, err = f.WriteString(content)
-	if err != nil {
-		return fmt.Errorf("failed to write to file: %w", err)
-	}
-
-	return nil
-}
-
 
 // UpdateOrRemoveKeyValue updates or deletes a key-value pair in the specified file.
 func UpdateOrRemoveKeyValue(envVar, key, newValue string, delete bool) error {
@@ -126,6 +84,15 @@ func UpdateOrRemoveKeyValue(envVar, key, newValue string, delete bool) error {
 	filePath := os.Getenv(envVar)
 	if filePath == "" {
 		return fmt.Errorf("environment variable %s is not set", envVar)
+	}
+
+	// Ensure the file exists before reading
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		// Create the file if it does not exist
+		_, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+		if err != nil {
+			return fmt.Errorf("failed to create file: %w", err)
+		}
 	}
 
 	// Determine the file extension to handle formats
