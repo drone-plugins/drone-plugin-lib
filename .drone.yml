@@ -14,9 +14,11 @@ steps:
 - name: staticcheck
   pull: always
   image: golang:1.19
+  environment:
+    GO111MODULE: "on" # Explicitly enable Go modules
   commands:
-  - go get honnef.co/go/tools/cmd/staticcheck
-  - go run honnef.co/go/tools/cmd/staticcheck ./...
+  - go install honnef.co/go/tools/cmd/staticcheck@v0.4.3
+  - staticcheck ./...
   volumes:
   - name: gopath
     path: /go
