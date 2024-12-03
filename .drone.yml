@@ -13,7 +13,7 @@ pool:
 steps:
 - name: staticcheck
   pull: always
-  image: golang:1.19
+  image: golang:1.23
   environment:
     GO111MODULE: "on" # Explicitly enable Go modules
   commands:
@@ -25,7 +25,7 @@ steps:
 
 - name: lint
   pull: always
-  image: golang:1.19
+  image: golang:1.23
   commands:
   - go get golang.org/x/lint/golint
   - go run golang.org/x/lint/golint -set_exit_status ./...
@@ -35,7 +35,7 @@ steps:
 
 - name: vet
   pull: always
-  image: golang:1.19
+  image: golang:1.23
   commands:
   - go vet ./...
   volumes:
@@ -44,7 +44,7 @@ steps:
 
 - name: test
   pull: always
-  image: golang:1.19
+  image: golang:1.23
   commands:
   - go test -cover -v ./...
   volumes:
