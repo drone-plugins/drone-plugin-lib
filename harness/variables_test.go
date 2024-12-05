@@ -307,7 +307,6 @@ func TestDeleteOutput(t *testing.T) {
 		t.Errorf("Expected file to be empty, got: %s", string(content))
 	}
 }
-
 func TestParseKeyValue(t *testing.T) {
 	tests := []struct {
 		line          string
@@ -324,6 +323,8 @@ func TestParseKeyValue(t *testing.T) {
 		{"key", ".env", "key", ""},
 		{"key=multi word value", ".env", "key", "multi word value"},
 		{"key=  spaced value  ", ".env", "key", "spaced value"},
+		{"key=first line\nsecond line", ".env", "key", "first line\nsecond line"},
+		{"key=first line\nsecond line\nthird line", ".env", "key", "first line\nsecond line\nthird line"},
 
 		// .out cases
 		{"key value", ".out", "key", "value"},
