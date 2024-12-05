@@ -172,8 +172,8 @@ func ParseKeyValue(line, ext string) (string, string) {
 		return strings.TrimSpace(parts[0]), ""
 	} else if ext == ".out" {
 		parts := strings.Fields(line)
-		if len(parts) == 2 {
-			return strings.TrimSpace(parts[0]), strings.TrimSpace(parts[1])
+		if len(parts) > 1 {
+			return strings.TrimSpace(parts[0]), strings.TrimSpace(strings.Join(parts[1:], " "))
 		}
 		return strings.TrimSpace(parts[0]), ""
 	}

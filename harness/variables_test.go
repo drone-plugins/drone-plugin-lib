@@ -307,3 +307,45 @@ func TestDeleteOutput(t *testing.T) {
 		t.Errorf("Expected file to be empty, got: %s", string(content))
 	}
 }
+
+func TestParseKeyValue(t *testing.T) {
+	tests := []struct {
+		line          string
+		ext           string
+		expectedKey   string
+		expectedValue string
+	}{
+		// .env cases
+		{"key=value", ".env", "key", "value"},
+		{"key= value", ".env", "key", "value"},
+		{"key =value", ".env", "key", "value"},
+		{"key = value", ".env", "key", "value"},
+		{"key=", ".env", "key", ""},
+		{"key", ".env", "key", ""},
+		{"key=multi word value", ".env", "key", "multi word value"},
+		{"key=  spaced value  ", ".env", "key", "spaced value"},
+
+		// .out cases
+		{"key value", ".out", "key", "value"},
+		{"key  value", ".out", "key", "value"},
+		{" key value ", ".out", "key", "value"},
+		{"key ", ".out", "key", ""},
+		{"key", ".out", "key", ""},
+		{"key multi word value", ".out", "key", "multi word value"},
+		{"key  spaced value  ", ".out", "key", "spaced value"},
+
+		// Unsupported extension cases
+		{"key=value", ".unknown", "", ""},
+		{"key value", ".unknown", "", ""},
+	}
+
+	for _, test := range tests {
+		t.Run(test.line+"_"+test.ext, func(t *testing.T) {
+			key, value := ParseKeyValue(test.line, test.ext)
+			if key != test.expectedKey || value != test.expectedValue {
+				t.Errorf("For line '%s' and ext '%s': expected ('%s', '%s'), got ('%s', '%s')",
+					test.line, test.ext, test.expectedKey, test.expectedValue, key, value)
+			}
+		})
+	}
+}
