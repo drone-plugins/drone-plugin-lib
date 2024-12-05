@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	v3 "github.com/harness/godotenv/v3"
 )
 
 const (
@@ -79,8 +81,7 @@ func SetErrorMetadata(message, code, category string) error {
 }
 
 // UpdateOrRemoveKeyValue updates or deletes a key-value pair in the specified file.
-func UpdateOrRemoveKeyValue(envVar, key, newValue string, delete bool) error {
-	// Get the file path from the environment variable
+func UpdateOrRemoveKeyValue(envVar, key, newValue string, deleteKey bool) error {
 	filePath := os.Getenv(envVar)
 	if filePath == "" {
 		return fmt.Errorf("environment variable %s is not set", envVar)
@@ -88,45 +89,72 @@ func UpdateOrRemoveKeyValue(envVar, key, newValue string, delete bool) error {
 
 	// Ensure the file exists before reading
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		// Create the file if it does not exist
 		_, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 		if err != nil {
 			return fmt.Errorf("failed to create file: %w", err)
 		}
 	}
 
-	// Determine the file extension to handle formats
+	// Trim trailing newline characters from newValue
+	newValue = strings.TrimRight(newValue, "\n")
+
 	ext := strings.ToLower(filepath.Ext(filePath))
 
-	// Read the file contents into memory
-	lines, err := ReadLines(filePath)
-	if err != nil {
-		return fmt.Errorf("failed to read file: %w", err)
-	}
+	if ext == ".env" {
+		// Use godotenv for .env files
+		data, err := v3.Read(filePath)
+		if err != nil {
+			return fmt.Errorf("failed to parse .env file: %w", err)
+		}
 
-	// Process lines
-	var updatedLines []string
-	found := false
-	for _, line := range lines {
-		k, v := ParseKeyValue(line, ext)
-		if k == key {
-			found = true
-			if delete {
-				continue // Skip the line to delete it
-			}
-			updatedLines = append(updatedLines, FormatKeyValue(k, newValue, ext))
+		if deleteKey {
+			delete(data, key)
 		} else {
-			updatedLines = append(updatedLines, FormatKeyValue(k, v, ext))
+			data[key] = newValue
+		}
+
+		err = v3.Write(data, filePath)
+		if err != nil {
+			return fmt.Errorf("failed to write .env file: %w", err)
+		}
+	} else {
+		// For .out files, process manually
+		// For .out files, check for multiline values
+		if strings.Contains(newValue, "\n") {
+			return fmt.Errorf("multiline values are not allowed for key %s in .out file", key)
+		}
+
+		lines, err := ReadLines(filePath)
+		if err != nil {
+			return fmt.Errorf("failed to read file: %w", err)
+		}
+
+		var updatedLines []string
+		found := false
+		for _, line := range lines {
+			k, v := ParseKeyValue(line, ext)
+			if k == key {
+				found = true
+				if deleteKey {
+					continue
+				}
+				updatedLines = append(updatedLines, FormatKeyValue(k, newValue, ext))
+			} else {
+				updatedLines = append(updatedLines, FormatKeyValue(k, v, ext))
+			}
+		}
+
+		if !found && !deleteKey {
+			updatedLines = append(updatedLines, FormatKeyValue(key, newValue, ext))
+		}
+
+		err = WriteLines(filePath, updatedLines)
+		if err != nil {
+			return fmt.Errorf("failed to write file: %w", err)
 		}
 	}
 
-	// Append new key-value if not found and not deleting
-	if !found && !delete {
-		updatedLines = append(updatedLines, FormatKeyValue(key, newValue, ext))
-	}
-
-	// Write updated lines back to the file
-	return WriteLines(filePath, updatedLines)
+	return nil
 }
 
 // ReadLines reads lines from a file and returns them as a slice of strings.
@@ -164,28 +192,22 @@ func WriteLines(filename string, lines []string) error {
 
 // ParseKeyValue parses a key-value pair from a string and returns the key and value.
 func ParseKeyValue(line, ext string) (string, string) {
-	if ext == ".env" {
-		parts := strings.SplitN(line, "=", 2)
-		if len(parts) == 2 {
-			return strings.TrimSpace(parts[0]), strings.TrimSpace(parts[1])
-		}
-		return strings.TrimSpace(parts[0]), ""
-	} else if ext == ".out" {
+	if ext == ".out" {
 		parts := strings.Fields(line)
 		if len(parts) > 1 {
 			return strings.TrimSpace(parts[0]), strings.TrimSpace(strings.Join(parts[1:], " "))
 		}
 		return strings.TrimSpace(parts[0]), ""
 	}
+	// .env is handled by godotenv, so this is not used for .env files
 	return "", ""
 }
 
-// FormatKeyValue formats a key-value pair into a string.
+// FormatKeyValue handles formatting for .env and .out files.
 func FormatKeyValue(key, value, ext string) string {
-	if ext == ".env" {
-		return fmt.Sprintf("%s=%s", key, value)
-	} else if ext == ".out" {
+	if ext == ".out" {
 		return fmt.Sprintf("%s %s", key, value)
 	}
+	// For .env files, use godotenv directly; this function won't apply
 	return ""
 }
