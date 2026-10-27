@@ -13,11 +13,11 @@ pool:
 steps:
 - name: staticcheck
   pull: always
-  image: golang:1.19
+  image: golang:1.26.10@sha256:24a707af49702fa44f02785475d02fb752f6982d3e9c0afb7696e1f0204e7ce9
   environment:
     GO111MODULE: "on" # Explicitly enable Go modules
   commands:
-  - go install honnef.co/go/tools/cmd/staticcheck@v0.4.3
+  - go install honnef.co/go/tools/cmd/staticcheck@v0.7.0
   - staticcheck ./...
   volumes:
   - name: gopath
@@ -25,7 +25,7 @@ steps:
 
 - name: lint
   pull: always
-  image: golang:1.19
+  image: golang:1.26.10@sha256:24a707af49702fa44f02785475d02fb752f6982d3e9c0afb7696e1f0204e7ce9
   commands:
   - go get golang.org/x/lint/golint
   - go run golang.org/x/lint/golint -set_exit_status ./...
@@ -35,7 +35,7 @@ steps:
 
 - name: vet
   pull: always
-  image: golang:1.19
+  image: golang:1.26.10@sha256:24a707af49702fa44f02785475d02fb752f6982d3e9c0afb7696e1f0204e7ce9
   commands:
   - go vet ./...
   volumes:
@@ -44,7 +44,7 @@ steps:
 
 - name: test
   pull: always
-  image: golang:1.19
+  image: golang:1.26.10@sha256:24a707af49702fa44f02785475d02fb752f6982d3e9c0afb7696e1f0204e7ce9
   commands:
   - go test -cover -v ./...
   volumes:
